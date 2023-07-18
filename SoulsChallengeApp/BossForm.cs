@@ -1,21 +1,34 @@
 ﻿using SoulsChallengeApp.Models;
 using System.Diagnostics;
-using System.Security.Policy;
-using System.Xml.Linq;
 
 namespace SoulsChallengeApp
 {
     public partial class BossForm : Form
     {
-        private static string baseFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "SoulsChallenge", "SoulsChallenge", "SoulsChallengeApp", "Games");
+        // Variables
+        private static string baseFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Games");
+        private GameData gameData;
         private List<Boss> bossList = new List<Boss>();
-        private List<Restriction> restrictionList = new List<Restriction>();
+        private RunType? currentRunType;
+        private int bossCount;
 
         public BossForm()
         {
             InitializeComponent();
+
+            gameData = new GameData();
+
+            InitializeRunTypes();
             FillAllBosses();
             FillGames();
+        }
+
+        // Initialization
+        private void InitializeRunTypes()
+        {
+            rbCasual.Tag = RunType.Casual;
+            rbChampion.Tag = RunType.Champion;
+            rbLegend.Tag = RunType.Legend;
         }
 
         // Fills
@@ -50,120 +63,7 @@ namespace SoulsChallengeApp
             cbxGames.SelectedIndex = 0;
         }
 
-        private Dictionary<string, GameInfo> gamesData = new Dictionary<string, GameInfo>();
-
-        private void cbxGames_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string name = cbxGames.Text;
-
-            if (gamesData.TryGetValue(name, out var gameInfo))
-            {
-                // Game data already loaded, update the UI
-                clbBosses.Items.Clear();
-                cbxRestrictions.Items.Clear();
-                int checkedCount = gameInfo.Bosses.Count(b => b.Completed);
-
-                gameInfo.Bosses.ForEach(b => clbBosses.Items.Add(b.Name!));
-
-                cbxRestrictions.Items.AddRange(gameInfo.Restrictions.Select(r => r.Name!).ToArray());
-
-                lblBosses.Text = $"{checkedCount}/{clbBosses.Items.Count}";
-            }
-            else
-            {
-                // Game data not loaded, read the files and populate the data model
-                string gameFolderPath = Path.Combine(baseFolderPath, name);
-                string bossPath = Path.Combine(gameFolderPath, "Bosses.txt");
-                string restrictionsPath = Path.Combine(gameFolderPath, "Restrictions.txt");
-
-                string[] bossNames = File.ReadAllLines(bossPath);
-                string[] restrictionNames = File.ReadAllLines(restrictionsPath);
-
-                bossList = bossNames.Select(b => new Boss { Name = b, Completed = false }).ToList();
-                restrictionList = restrictionNames.Select(r => new Restriction { Name = r }).ToList();
-
-                GameInfo newGameInfo = new GameInfo
-                {
-                    Bosses = bossList,
-                    Restrictions = restrictionList
-                };
-
-                gamesData.Add(name, newGameInfo);
-
-                // Update the UI with the new game data
-                cbxGames_SelectedIndexChanged(sender, e);
-            }
-        }
-
-        private RunType? currentRunType;
-        private int bossCount;
-        private void clbBosses_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            bossCount = clbBosses.CheckedItems.Count + (e.NewValue == CheckState.Checked ? 1 : -1);
-            lblBosses.Text = $"{bossCount}/{clbBosses.Items.Count}";
-
-            CheckRunType();
-        }
-
-        private void CheckRunType()
-        {
-            if (currentRunType != RunType.Casual && bossCount == clbBosses.Items.Count)
-                btnSubmit.Enabled = true;
-            else
-                btnSubmit.Enabled = false;
-        }
-
-        private void rbCasual_CheckedChanged(object sender, EventArgs e)
-        {
-            currentRunType = RunType.Casual;
-
-            cbxRestrictions.Enabled = false;
-            cbxRestrictions.SelectedItem = null;
-
-            CheckRunType();
-        }
-
-        private void rbChampion_CheckedChanged(object sender, EventArgs e)
-        {
-            currentRunType = RunType.Champion;
-
-            cbxRestrictions.Enabled = false;
-            cbxRestrictions.SelectedItem = null;
-
-            CheckRunType();
-        }
-
-        private void rbLegend_CheckedChanged(object sender, EventArgs e)
-        {
-            currentRunType = RunType.Legend;
-
-            cbxRestrictions.Enabled = true;
-
-            CheckRunType();
-        }
-
-        private void btnSubmit_Click(object sender, EventArgs e)
-        {
-            string gameName = cbxGames.Text;
-            string gameFolderPath = Path.Combine(baseFolderPath, gameName);
-            string submissionPath = Path.Combine(gameFolderPath, "Submission.txt");
-
-            string submissionTemplate = File.ReadAllText(submissionPath);
-
-            string category = currentRunType.ToString()!;
-            string restriction = FindRunTypes();
-            string submissionURL = submissionTemplate
-                .Replace("{Category}", category)
-                .Replace("{Restriction}", restriction);
-
-            ProcessStartInfo psi = new ProcessStartInfo
-            {
-                FileName = submissionURL,
-                UseShellExecute = true
-            };
-            Process.Start(psi);
-        }
-
+        // Runtypes
         private string FindRunTypes()
         {
             var types = new[]
@@ -172,7 +72,7 @@ namespace SoulsChallengeApp
                 "+0",           // +0
                 "No Roll",      // NO ROLL
                 "Deathless",    // DEATHLESS
-                "NoHit"        // NO HIT
+                "NoHit"         // NO HIT
             };
 
             string selectedRestriction = cbxRestrictions.Text;
@@ -205,6 +105,109 @@ namespace SoulsChallengeApp
             }
 
             return foundType;
+        }
+        private void CheckRunType()
+        {
+            bool completedRun = bossCount == clbBosses.Items.Count;
+
+            if (currentRunType != RunType.Casual && completedRun)
+                btnSubmit.Enabled = true;
+            else
+                btnSubmit.Enabled = false;
+
+            if (completedRun)
+            {
+                lblCompletion.Text = "COMPLETED";
+                lblCompletion.ForeColor = Color.Green;
+            }
+            else
+            {
+                lblCompletion.Text = "UNCOMPLETED";
+                lblCompletion.ForeColor = Color.Red;
+            }
+        }
+
+        // Events
+        private void cbxGames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string name = cbxGames.Text;
+
+            gameData.LoadGameData(name, baseFolderPath);
+
+            var gameInfo = gameData.GetGameInfo(name);
+
+            clbBosses.Items.Clear();
+            cbxRestrictions.Items.Clear();
+            int checkedCount = gameInfo.Bosses.Count(b => b.Completed);
+
+            gameInfo.Bosses.ForEach(b => clbBosses.Items.Add(b.Name!));
+            cbxRestrictions.Items.AddRange(gameInfo.Restrictions.Select(r => r.Name).ToArray());
+
+            lblBosses.Text = $"{checkedCount}/{clbBosses.Items.Count}";
+        }
+        private void clbBosses_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            bossCount = clbBosses.CheckedItems.Count + (e.NewValue == CheckState.Checked ? 1 : -1);
+            lblBosses.Text = $"{bossCount}/{clbBosses.Items.Count}";
+
+            CheckRunType();
+        }
+        private void rb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is RadioButton radioButton)
+            {
+                currentRunType = (RunType)radioButton.Tag;
+
+                if (currentRunType == RunType.Legend)
+                {
+                    cbxRestrictions.Enabled = true;
+                }
+                else
+                {
+                    cbxRestrictions.Enabled = false;
+                    cbxRestrictions.SelectedItem = null;
+                }
+
+                CheckRunType();
+            }
+        }
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            string gameName = cbxGames.Text;
+            string gameFolderPath = Path.Combine(baseFolderPath, gameName);
+            string submissionPath = Path.Combine(gameFolderPath, "Submission.txt");
+
+            string submissionTemplate = File.ReadAllText(submissionPath);
+
+            string category = currentRunType.ToString()!;
+            string restriction = FindRunTypes();
+            string submissionURL = submissionTemplate
+                .Replace("{Category}", category)
+                .Replace("{Restriction}", restriction);
+
+            ProcessStartInfo psi = new ProcessStartInfo
+            {
+                FileName = submissionURL,
+                UseShellExecute = true
+            };
+
+            Process.Start(psi);
+        }
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < clbBosses.Items.Count; i++)
+                clbBosses.SetItemChecked(i, false);
+        }
+        private void btnRules_Click(object sender, EventArgs e)
+        {
+            string rulesURL = @"https://docs.google.com/document/d/1Hffx3O7SavIRUErIeLXMvRQ5yH6Lx1Xs9ZFuPqglvr4/edit";
+            ProcessStartInfo psi = new ProcessStartInfo
+            {
+                FileName = rulesURL,
+                UseShellExecute = true
+            };
+
+            Process.Start(psi);
         }
     }
 }

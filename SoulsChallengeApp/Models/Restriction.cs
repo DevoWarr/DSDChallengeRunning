@@ -8,6 +8,6 @@ namespace SoulsChallengeApp.Models
 {
     public class Restriction
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }
