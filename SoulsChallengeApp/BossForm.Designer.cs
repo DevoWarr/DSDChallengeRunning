@@ -42,7 +42,7 @@
             btnReset = new Button();
             lblCompletion = new Label();
             btnRules = new Button();
-            button2 = new Button();
+            btnMode = new Button();
             label4 = new Label();
             SuspendLayout();
             // 
@@ -60,6 +60,8 @@
             // 
             // cbxGames
             // 
+            cbxGames.Cursor = Cursors.Hand;
+            cbxGames.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxGames.FormattingEnabled = true;
             cbxGames.Location = new Point(12, 60);
             cbxGames.Name = "cbxGames";
@@ -89,6 +91,8 @@
             // 
             // cbxRestrictions
             // 
+            cbxRestrictions.Cursor = Cursors.Hand;
+            cbxRestrictions.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxRestrictions.Enabled = false;
             cbxRestrictions.FormattingEnabled = true;
             cbxRestrictions.Items.AddRange(new object[] { "None" });
@@ -110,6 +114,7 @@
             // rbLegend
             // 
             rbLegend.AutoSize = true;
+            rbLegend.Cursor = Cursors.Hand;
             rbLegend.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rbLegend.Location = new Point(490, 100);
             rbLegend.Name = "rbLegend";
@@ -123,6 +128,7 @@
             // rbChampion
             // 
             rbChampion.AutoSize = true;
+            rbChampion.Cursor = Cursors.Hand;
             rbChampion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rbChampion.Location = new Point(321, 100);
             rbChampion.Name = "rbChampion";
@@ -136,6 +142,7 @@
             // rbCasual
             // 
             rbCasual.AutoSize = true;
+            rbCasual.Cursor = Cursors.Hand;
             rbCasual.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rbCasual.Location = new Point(192, 100);
             rbCasual.Name = "rbCasual";
@@ -148,6 +155,7 @@
             // 
             // btnSubmit
             // 
+            btnSubmit.Cursor = Cursors.Hand;
             btnSubmit.Enabled = false;
             btnSubmit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnSubmit.Location = new Point(627, 100);
@@ -170,6 +178,7 @@
             // 
             // btnReset
             // 
+            btnReset.Cursor = Cursors.Hand;
             btnReset.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnReset.Location = new Point(12, 100);
             btnReset.Name = "btnReset";
@@ -192,6 +201,7 @@
             // 
             // btnRules
             // 
+            btnRules.Cursor = Cursors.Hand;
             btnRules.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnRules.Location = new Point(869, 100);
             btnRules.Name = "btnRules";
@@ -201,15 +211,17 @@
             btnRules.UseVisualStyleBackColor = true;
             btnRules.Click += btnRules_Click;
             // 
-            // button2
+            // btnMode
             // 
-            button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(869, 60);
-            button2.Name = "button2";
-            button2.Size = new Size(201, 40);
-            button2.TabIndex = 21;
-            button2.Text = "Settings";
-            button2.UseVisualStyleBackColor = true;
+            btnMode.Cursor = Cursors.Hand;
+            btnMode.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnMode.Location = new Point(869, 60);
+            btnMode.Name = "btnMode";
+            btnMode.Size = new Size(201, 40);
+            btnMode.TabIndex = 21;
+            btnMode.Text = "Dark Mode";
+            btnMode.UseVisualStyleBackColor = true;
+            btnMode.Click += btnMode_Click;
             // 
             // label4
             // 
@@ -228,7 +240,7 @@
             BackColor = SystemColors.Control;
             ClientSize = new Size(1082, 753);
             Controls.Add(label4);
-            Controls.Add(button2);
+            Controls.Add(btnMode);
             Controls.Add(btnRules);
             Controls.Add(lblCompletion);
             Controls.Add(btnReset);
@@ -265,7 +277,7 @@
         private Button btnReset;
         private Label lblCompletion;
         private Button btnRules;
-        private Button button2;
+        private Button btnMode;
         private Label label4;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using SoulsChallengeApp.Models;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace SoulsChallengeApp
 {
@@ -11,11 +12,12 @@ namespace SoulsChallengeApp
         private List<Boss> bossList = new List<Boss>();
         private RunType? currentRunType;
         private int bossCount;
+        private bool isDarkMode = false;
 
         public BossForm()
         {
             InitializeComponent();
-
+            Text = "Souls Challenger";
             gameData = new GameData();
 
             InitializeRunTypes();
@@ -208,6 +210,46 @@ namespace SoulsChallengeApp
             };
 
             Process.Start(psi);
+        }
+
+        private void btnMode_Click(object sender, EventArgs e)
+        {
+            isDarkMode = !isDarkMode;
+
+            if (isDarkMode)
+            {
+                SetDarkMode();
+                btnMode.Text = "Light Mode";
+            }
+            else
+            {
+                SetLightMode();
+                btnMode.Text = "Dark Mode";
+            }
+        }
+
+        // UI
+        private void SetLightMode()
+        {
+            BackColor = ColorThemes.BackgroundLight;
+            ForeColor = ColorThemes.ForegroundLight;
+            clbBosses.BackColor = ColorThemes.BossesLight;
+            clbBosses.ForeColor = ColorThemes.ForegroundLight;
+        }
+        private void SetDarkMode()
+        {
+            BackColor = ColorThemes.BackgroundDark;
+            ForeColor = ColorThemes.ForegroundDark;
+            clbBosses.BackColor = ColorThemes.BossesDark;
+            clbBosses.ForeColor = ColorThemes.ForegroundDark;
+
+            foreach (Control control in Controls)
+            {
+                if (control is Button button)
+                {
+                    button.ForeColor = ColorThemes.ForegroundLight;
+                }
+            }
         }
     }
 }
