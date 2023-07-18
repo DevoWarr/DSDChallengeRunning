@@ -1,0 +1,5 @@
+SL1 NG+5
+SL1 No Rolling/Blocking/Parrying	
+SL1 +0 Weapons No Toxic/Poison	
+SL1 Fist only
+SL1 NoHit

@@ -1,0 +1,6 @@
+BL4 NG+6
+BL4 +0 Weapons
+BL4 Hunter's Torch only
+BL4 No Rolling/Quickstepping
+BL4 NoHit Any%
+BL4 Deathless All bosses

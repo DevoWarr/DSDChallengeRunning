@@ -1,0 +1,3 @@
+RL1 NG+7 No Auxiliary (Poison/Rot/Bleed/Frost/Sleep/Madness/Blight)
+RL1 No Rolling/Blocking/Parrying
+RL1 +0 Weapons/No Auxiliary (Poison/Rot/Bleed/Frost/Sleep/Madness/Blight)

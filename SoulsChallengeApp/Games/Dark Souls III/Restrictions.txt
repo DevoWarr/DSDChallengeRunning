@@ -1,0 +1,6 @@
+SL1 NG+7 No Auxiliary (Bleed/Toxic/Poison/Frost)
+SL1 No Rolling/Blocking/Parrying
+SL1 +0 Weapons No Infusions/No Auxiliary (Bleed/Toxic/Poison/Frost)
+SL1 NG+ Broken Weapons No Auxiliary (Bleed/Toxic/Poison/Frost)
+SL1 NoHit Any%
+SL1 Deathless All bosses
