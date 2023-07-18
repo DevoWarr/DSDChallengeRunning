@@ -1,6 +1,5 @@
 ﻿using SoulsChallengeApp.Models;
 using System.Diagnostics;
-using System.Drawing;
 
 namespace SoulsChallengeApp
 {
