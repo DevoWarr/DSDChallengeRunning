@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using Octokit;
+using Semver;
 using SoulsChallengeApp.Models;
 using System.Diagnostics;
 using System.Runtime.Intrinsics.X86;
@@ -23,7 +25,7 @@ namespace SoulsChallengeApp
         public BossForm()
         {
             InitializeComponent();
-            Text = "Souls Challenger";
+            Text = $"DSD Challenge Running {System.Windows.Forms.Application.ProductVersion}";
             gameData = new GameData();
 
             InitializeRunTypes();
@@ -179,6 +181,7 @@ namespace SoulsChallengeApp
             string otherRestriction = HttpUtility.UrlEncode(restriction);
 
             submissionURL += $"{entryOther}{otherRestriction}";
+
             DialogResult result = MessageBox.Show($"Congratulations on completing your run for {currentGame}: \n{restriction}!\n" +
                 $"You will be redirected to the Google Submission Form.\n" +
                 "Would you like to continue?", "Submission Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -264,13 +267,35 @@ namespace SoulsChallengeApp
                 btnMode.Text = "Dark Mode";
             }
         }
-        private void BossForm_Load(object sender, EventArgs e)
+        private async void BossForm_Load(object sender, EventArgs e)
         {
             isDarkMode = Properties.Settings.Default.UserSelectedMode;
             SetMode(isDarkMode);
 
             string gameDataJson = Properties.Settings.Default.CompletedBosses;
             gameData?.DeserializeGameDataFromJson(gameDataJson);
+
+            // GitHub
+            GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue("SoulsChallenge"));
+            try
+            {
+                Release release = await gitHubClient.Repository.Release.GetLatest("DevoWarr", "SoulsChallenge");
+
+                if (SemVersion.Parse(release.TagName) > System.Windows.Forms.Application.ProductVersion)
+                {
+                    DialogResult result = MessageBox.Show("New Update Available\n" +
+                        "Would you like to update to the latest version?",
+                        "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
+                        await OpenURLAsync(release.HtmlUrl);
+                    else return;
+                }
+            }
+            catch (Exception ex) when (ex is HttpRequestException || ex is ApiException || ex is ArgumentException)
+            {
+                MessageBox.Show("App Version Unknown!", "Unknown App Version");
+            }
         }
 
         private void BossForm_FormClosing(object sender, FormClosingEventArgs e)
