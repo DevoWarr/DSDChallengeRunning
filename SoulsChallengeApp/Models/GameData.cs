@@ -9,7 +9,7 @@ namespace SoulsChallengeApp.Models
 {
     public class GameData
     {
-        private Dictionary<string, GameInfo> gamesData = new Dictionary<string, GameInfo>();
+        private static Dictionary<string, GameInfo> gamesData = new Dictionary<string, GameInfo>();
 
         public void LoadGameData(string name, string baseFolderPath)
         {

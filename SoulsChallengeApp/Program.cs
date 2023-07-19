@@ -1,3 +1,5 @@
+using System.Configuration;
+
 namespace SoulsChallengeApp
 {
     internal static class Program
@@ -9,6 +11,7 @@ namespace SoulsChallengeApp
         static void Main()
         {
             Properties.Settings settings = Properties.Settings.Default;
+
             if (settings.UpgradeRequired)
             {
                 settings.Upgrade();

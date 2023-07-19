@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BossForm));
             clbBosses = new CheckedListBox();
             cbxGames = new ComboBox();
             label1 = new Label();
@@ -50,12 +51,9 @@
             // 
             clbBosses.BackColor = SystemColors.Control;
             clbBosses.CheckOnClick = true;
-            clbBosses.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            resources.ApplyResources(clbBosses, "clbBosses");
             clbBosses.FormattingEnabled = true;
-            clbBosses.Location = new Point(12, 158);
             clbBosses.Name = "clbBosses";
-            clbBosses.Size = new Size(1058, 584);
-            clbBosses.TabIndex = 0;
             clbBosses.ItemCheck += clbBosses_ItemCheck;
             // 
             // cbxGames
@@ -63,183 +61,114 @@
             cbxGames.Cursor = Cursors.Hand;
             cbxGames.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxGames.FormattingEnabled = true;
-            cbxGames.Location = new Point(12, 60);
+            resources.ApplyResources(cbxGames, "cbxGames");
             cbxGames.Name = "cbxGames";
-            cbxGames.Size = new Size(151, 28);
-            cbxGames.TabIndex = 1;
             cbxGames.SelectedIndexChanged += cbxGames_SelectedIndexChanged;
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(12, 20);
+            resources.ApplyResources(label1, "label1");
             label1.Name = "label1";
-            label1.Size = new Size(63, 28);
-            label1.TabIndex = 2;
-            label1.Text = "Game";
             // 
             // lblBosses
             // 
-            lblBosses.AutoSize = true;
-            lblBosses.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblBosses.Location = new Point(777, 60);
+            resources.ApplyResources(lblBosses, "lblBosses");
             lblBosses.Name = "lblBosses";
-            lblBosses.Size = new Size(42, 28);
-            lblBosses.TabIndex = 10;
-            lblBosses.Text = "0/0";
             // 
             // cbxRestrictions
             // 
             cbxRestrictions.Cursor = Cursors.Hand;
             cbxRestrictions.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxRestrictions.Enabled = false;
-            cbxRestrictions.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            resources.ApplyResources(cbxRestrictions, "cbxRestrictions");
             cbxRestrictions.FormattingEnabled = true;
-            cbxRestrictions.Items.AddRange(new object[] { "None" });
-            cbxRestrictions.Location = new Point(192, 60);
+            cbxRestrictions.Items.AddRange(new object[] { resources.GetString("cbxRestrictions.Items") });
             cbxRestrictions.Name = "cbxRestrictions";
-            cbxRestrictions.Size = new Size(395, 25);
-            cbxRestrictions.TabIndex = 11;
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(192, 20);
+            resources.ApplyResources(label2, "label2");
             label2.Name = "label2";
-            label2.Size = new Size(104, 28);
-            label2.TabIndex = 12;
-            label2.Text = "Restriction";
             // 
             // rbLegend
             // 
-            rbLegend.AutoSize = true;
+            resources.ApplyResources(rbLegend, "rbLegend");
             rbLegend.Cursor = Cursors.Hand;
-            rbLegend.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            rbLegend.Location = new Point(490, 100);
             rbLegend.Name = "rbLegend";
-            rbLegend.Size = new Size(97, 32);
-            rbLegend.TabIndex = 13;
             rbLegend.TabStop = true;
-            rbLegend.Text = "Legend";
             rbLegend.UseVisualStyleBackColor = true;
             rbLegend.CheckedChanged += rb_CheckedChanged;
             // 
             // rbChampion
             // 
-            rbChampion.AutoSize = true;
+            resources.ApplyResources(rbChampion, "rbChampion");
             rbChampion.Cursor = Cursors.Hand;
-            rbChampion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            rbChampion.Location = new Point(321, 100);
             rbChampion.Name = "rbChampion";
-            rbChampion.Size = new Size(123, 32);
-            rbChampion.TabIndex = 14;
             rbChampion.TabStop = true;
-            rbChampion.Text = "Champion";
             rbChampion.UseVisualStyleBackColor = true;
             rbChampion.CheckedChanged += rb_CheckedChanged;
             // 
             // rbCasual
             // 
-            rbCasual.AutoSize = true;
+            resources.ApplyResources(rbCasual, "rbCasual");
             rbCasual.Cursor = Cursors.Hand;
-            rbCasual.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            rbCasual.Location = new Point(192, 100);
             rbCasual.Name = "rbCasual";
-            rbCasual.Size = new Size(89, 32);
-            rbCasual.TabIndex = 15;
             rbCasual.TabStop = true;
-            rbCasual.Text = "Casual";
             rbCasual.UseVisualStyleBackColor = true;
             rbCasual.CheckedChanged += rb_CheckedChanged;
             // 
             // btnSubmit
             // 
             btnSubmit.Cursor = Cursors.Hand;
-            btnSubmit.Enabled = false;
-            btnSubmit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnSubmit.Location = new Point(627, 100);
+            resources.ApplyResources(btnSubmit, "btnSubmit");
             btnSubmit.Name = "btnSubmit";
-            btnSubmit.Size = new Size(208, 40);
-            btnSubmit.TabIndex = 16;
-            btnSubmit.Text = "Submit";
             btnSubmit.UseVisualStyleBackColor = true;
             btnSubmit.Click += btnSubmit_Click;
             // 
             // label3
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(627, 20);
+            resources.ApplyResources(label3, "label3");
             label3.Name = "label3";
-            label3.Size = new Size(112, 28);
-            label3.TabIndex = 17;
-            label3.Text = "Submission";
             // 
             // btnReset
             // 
             btnReset.Cursor = Cursors.Hand;
-            btnReset.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnReset.Location = new Point(12, 100);
+            resources.ApplyResources(btnReset, "btnReset");
             btnReset.Name = "btnReset";
-            btnReset.Size = new Size(151, 40);
-            btnReset.TabIndex = 18;
-            btnReset.Text = "Reset";
             btnReset.UseVisualStyleBackColor = true;
             btnReset.Click += btnReset_Click;
             // 
             // lblCompletion
             // 
-            lblCompletion.AutoSize = true;
-            lblCompletion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            resources.ApplyResources(lblCompletion, "lblCompletion");
             lblCompletion.ForeColor = Color.Crimson;
-            lblCompletion.Location = new Point(627, 60);
             lblCompletion.Name = "lblCompletion";
-            lblCompletion.Size = new Size(149, 28);
-            lblCompletion.TabIndex = 19;
-            lblCompletion.Text = "UNCOMPLETED";
             // 
             // btnRules
             // 
             btnRules.Cursor = Cursors.Hand;
-            btnRules.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnRules.Location = new Point(869, 100);
+            resources.ApplyResources(btnRules, "btnRules");
             btnRules.Name = "btnRules";
-            btnRules.Size = new Size(201, 40);
-            btnRules.TabIndex = 20;
-            btnRules.Text = "Rules";
             btnRules.UseVisualStyleBackColor = true;
             btnRules.Click += btnRules_Click;
             // 
             // btnMode
             // 
             btnMode.Cursor = Cursors.Hand;
-            btnMode.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnMode.Location = new Point(869, 60);
+            resources.ApplyResources(btnMode, "btnMode");
             btnMode.Name = "btnMode";
-            btnMode.Size = new Size(201, 40);
-            btnMode.TabIndex = 21;
-            btnMode.Text = "Dark Mode";
             btnMode.UseVisualStyleBackColor = true;
             btnMode.Click += btnMode_Click;
             // 
             // label4
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(869, 20);
+            resources.ApplyResources(label4, "label4");
             label4.Name = "label4";
-            label4.Size = new Size(62, 28);
-            label4.TabIndex = 22;
-            label4.Text = "Other";
             // 
             // BossForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1082, 753);
             Controls.Add(label4);
             Controls.Add(btnMode);
             Controls.Add(btnRules);
@@ -256,10 +185,9 @@
             Controls.Add(label1);
             Controls.Add(cbxGames);
             Controls.Add(clbBosses);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "BossForm";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "BossForm";
             FormClosing += BossForm_FormClosing;
             Load += BossForm_Load;
             ResumeLayout(false);
