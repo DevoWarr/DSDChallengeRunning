@@ -3,7 +3,6 @@ using Octokit;
 using Semver;
 using SoulsChallengeApp.Models;
 using System.Diagnostics;
-using System.Runtime.Intrinsics.X86;
 using System.Web;
 
 namespace SoulsChallengeApp
@@ -73,39 +72,6 @@ namespace SoulsChallengeApp
             cbxGames.SelectedIndex = 0;
         }
 
-        // Runtypes
-        private List<string> FindRunTypes()
-        {
-            var types = new List<string>
-            {
-                "NG", "CoC", "Broken Thief Sword", "Broken Straight Sword", "+0",
-                "No Roll", "Deathless", "NoHit", "NG+ 7 No Aux", "No Roll/Block/Parry", "+0 Weapons No Aux",
-                "No Deflect", "No Items", "Sword Only", "Base Att", "Hardmode"
-            };
-
-            string selectedRestriction = cbxRestrictions.Text;
-
-            var restrictions = types
-                .Where(type => selectedRestriction.Contains(type))
-                .Select(type => HttpUtility.UrlEncode(type))
-                .ToList();
-
-            if (restrictions.Count == 0)
-                restrictions.Add("Other");
-
-            return restrictions;
-        }
-
-        private void CheckRunType()
-        {
-            bool completedRun = bossCount == clbBosses.Items.Count;
-
-            btnSubmit.Enabled = currentRunType != RunType.Casual && completedRun;
-
-            lblCompletion.Text = completedRun ? "COMPLETED" : "UNCOMPLETED";
-            lblCompletion.ForeColor = completedRun ? Color.Green : Color.Red;
-        }
-
         // Events
         private async void cbxGames_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -125,10 +91,6 @@ namespace SoulsChallengeApp
 
             CheckCompletedBosses();
         }
-
-        private async Task LoadGameDataAsync(string gameName, string baseFolderPath) =>
-            await Task.Run(() => gameData.LoadGameData(gameName, baseFolderPath));
-
         private void clbBosses_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             bossCount = clbBosses.CheckedItems.Count + (e.NewValue == CheckState.Checked ? 1 : -1);
@@ -158,6 +120,18 @@ namespace SoulsChallengeApp
             }
         }
 
+
+        // Button Events
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < clbBosses.Items.Count; i++)
+                clbBosses.SetItemChecked(i, false);
+
+            bossCount = 0;
+            lblBosses.Text = $"{bossCount}/{clbBosses.Items.Count}";
+
+            CheckRunType();
+        }
         private async void btnSubmit_Click(object sender, EventArgs e)
         {
             // Entry IDS
@@ -190,38 +164,10 @@ namespace SoulsChallengeApp
                 await OpenURLAsync(submissionURL);
             else return;
         }
-
-        private async Task OpenURLAsync(string url)
-        {
-            await Task.Run(() =>
-            {
-                ProcessStartInfo psi = new ProcessStartInfo
-                {
-                    FileName = url,
-                    UseShellExecute = true
-                };
-
-                using (Process.Start(psi)) { }
-            });
-        }
-
-
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < clbBosses.Items.Count; i++)
-                clbBosses.SetItemChecked(i, false);
-
-            bossCount = 0;
-            lblBosses.Text = $"{bossCount}/{clbBosses.Items.Count}";
-
-            CheckRunType();
-        }
-
         private async void btnRules_Click(object sender, EventArgs e)
         {
             await OpenURLAsync(RulesURL);
         }
-
         private void btnMode_Click(object sender, EventArgs e)
         {
             isDarkMode = !isDarkMode;
@@ -237,7 +183,6 @@ namespace SoulsChallengeApp
             clbBosses.BackColor = ColorThemes.BossesLight;
             clbBosses.ForeColor = ColorThemes.ForegroundLight;
         }
-
         private void SetDarkMode()
         {
             BackColor = ColorThemes.BackgroundDark;
@@ -253,7 +198,6 @@ namespace SoulsChallengeApp
                 }
             }
         }
-
         private void SetMode(bool isDarkMode)
         {
             if (isDarkMode)
@@ -267,6 +211,8 @@ namespace SoulsChallengeApp
                 btnMode.Text = "Dark Mode";
             }
         }
+
+        // BossForm
         private async void BossForm_Load(object sender, EventArgs e)
         {
             isDarkMode = Properties.Settings.Default.UserSelectedMode;
@@ -297,13 +243,13 @@ namespace SoulsChallengeApp
                 MessageBox.Show("App Version Unknown!", "Unknown App Version");
             }
         }
-
         private void BossForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             var gameDataJson = gameData.SerializeGameDataToJson();
             Properties.Settings.Default.CompletedBosses = gameDataJson;
         }
 
+        // Methods
         private void CheckCompletedBosses()
         {
             string completedBossesJson = Properties.Settings.Default.CompletedBosses;
@@ -324,5 +270,51 @@ namespace SoulsChallengeApp
                 }
             }
         }
+        private List<string> FindRunTypes()
+        {
+            var types = new List<string>
+            {
+                "NG", "CoC", "Broken Thief Sword", "Broken Straight Sword", "+0",
+                "No Roll", "Deathless", "NoHit", "NG+ 7 No Aux", "No Roll/Block/Parry", "+0 Weapons No Aux",
+                "No Deflect", "No Items", "Sword Only", "Base Att", "Hardmode"
+            };
+
+            string selectedRestriction = cbxRestrictions.Text;
+
+            var restrictions = types
+                .Where(type => selectedRestriction.Contains(type))
+                .Select(type => HttpUtility.UrlEncode(type))
+                .ToList();
+
+            if (restrictions.Count == 0)
+                restrictions.Add("Other");
+
+            return restrictions;
+        }
+        private void CheckRunType()
+        {
+            bool completedRun = bossCount == clbBosses.Items.Count;
+
+            btnSubmit.Enabled = currentRunType != RunType.Casual && completedRun;
+
+            lblCompletion.Text = completedRun ? "COMPLETED" : "UNCOMPLETED";
+            lblCompletion.ForeColor = completedRun ? Color.Green : Color.Red;
+        }
+        private async Task OpenURLAsync(string url)
+        {
+            await Task.Run(() =>
+            {
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                };
+
+                using (Process.Start(psi)) { }
+            });
+        }
+        private async Task LoadGameDataAsync(string gameName, string basePath) =>
+    await Task.Run(() => gameData.LoadGameData(gameName, basePath));
+
     }
 }
