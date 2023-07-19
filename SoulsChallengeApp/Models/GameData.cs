@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,20 +23,15 @@ namespace SoulsChallengeApp.Models
             var bossList = bossNames.Select(b => new Boss { Name = b, Completed = false }).ToList();
             var restrictionList = restrictionNames.Select(r => new Restriction { Name = r }).ToList();
 
-            // Check if the key already exists in the dictionary
             if (gamesData.ContainsKey(name))
             {
-                // If it exists, update the existing entry
-                gamesData[name].GameName = name;
                 gamesData[name].Bosses = bossList;
                 gamesData[name].Restrictions = restrictionList;
             }
             else
             {
-                // If it doesn't exist, add a new entry
                 GameInfo newGameInfo = new GameInfo
                 {
-                    GameName = name,
                     Bosses = bossList,
                     Restrictions = restrictionList
                 };
@@ -44,9 +40,18 @@ namespace SoulsChallengeApp.Models
         }
 
 
-        public GameInfo GetGameInfo(string name)
+        public GameInfo GetGameInfo(string name) => gamesData[name];
+        public void UpdateCompletedBosses(string gameName, List<Boss> completedBosses)
         {
-            return gamesData[name];
+            if (gamesData.TryGetValue(gameName, out var gameInfo))
+                gameInfo.Bosses!.ForEach(b => b.Completed = completedBosses.Any
+                (cb => cb.Name == b.Name && cb.Completed));
         }
+
+        // Serialization & Deserialization
+        public string SerializeGameDataToJson() => JsonConvert.SerializeObject(gamesData);
+
+        public void DeserializeGameDataFromJson(string jsonData) =>
+            gamesData = JsonConvert.DeserializeObject<Dictionary<string, GameInfo>>(jsonData)!;
     }
 }

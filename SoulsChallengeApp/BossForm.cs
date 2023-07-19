@@ -12,11 +12,14 @@ namespace SoulsChallengeApp
 {
     public partial class BossForm : Form
     {
+        // Constants
+        private const string SubmissionTemplate = "{Category}/{Restriction}";
+        private const string RulesURL = @"https://docs.google.com/document/d/1Hffx3O7SavIRUErIeLXMvRQ5yH6Lx1Xs9ZFuPqglvr4/edit";
+
         // Variables
         private static string baseFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Games");
         private GameData gameData;
         private string currentGame;
-        private Dictionary<string, List<Boss>> completedBossesDict = new Dictionary<string, List<Boss>>();
         public List<Boss> bossList = new List<Boss>();
         private RunType? currentRunType;
         private int bossCount;
@@ -76,88 +79,59 @@ namespace SoulsChallengeApp
         // Runtypes
         private string FindRunTypes()
         {
-            var types = new[]
+            var types = new Dictionary<string, string>
             {
-                "NG",           // MAX NG
-                "+0",           // +0
-                "No Roll",      // NO ROLL
-                "Deathless",    // DEATHLESS
-                "NoHit"         // NO HIT
+                { "NG", "Max+Ng" },             // MAX NG
+                { "+0", "%2B0" },               // +0 WEAPON
+                { "No Roll", "No+Roll" },       // NO ROLL
+                { "Deathless", "Deathless" },   // DEATHLESS
+                { "NoHit", "No+Hit" }           // NO HIT
             };
 
             string selectedRestriction = cbxRestrictions.Text;
 
-            string foundType = "Other";
-            foreach (string type in types)
+            foreach (var type in types)
             {
-                if (selectedRestriction.Contains(type))
+                if (selectedRestriction.Contains(type.Key))
                 {
-                    switch (type)
-                    {
-                        case "NG":
-                            foundType = "Max+Ng";
-                            break;
-                        case "+0":
-                            foundType = "%2B0";
-                            break;
-                        case "No Roll":
-                            foundType = "No+Roll";
-                            break;
-                        case "Deathless":
-                            foundType = "Deathless";
-                            break;
-                        case "NoHit":
-                            foundType = "No+Hit";
-                            break;
-                    }
-                    break;
+                    return type.Value;
                 }
             }
 
-            return foundType;
+            return "Other";
         }
         private void CheckRunType()
         {
             bool completedRun = bossCount == clbBosses.Items.Count;
 
-            if (currentRunType != RunType.Casual && completedRun)
-                btnSubmit.Enabled = true;
-            else
-                btnSubmit.Enabled = false;
+            btnSubmit.Enabled = currentRunType != RunType.Casual && completedRun;
 
-            if (completedRun)
-            {
-                lblCompletion.Text = "COMPLETED";
-                lblCompletion.ForeColor = Color.Green;
-            }
-            else
-            {
-                lblCompletion.Text = "UNCOMPLETED";
-                lblCompletion.ForeColor = Color.Red;
-            }
+            lblCompletion.Text = completedRun ? "COMPLETED" : "UNCOMPLETED";
+            lblCompletion.ForeColor = completedRun ? Color.Green : Color.Red;
         }
 
         // Events
-        private void cbxGames_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbxGames_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentGame = cbxGames.Text;
 
-            gameData.LoadGameData(currentGame, baseFolderPath);
-
+            await LoadGameDataAsync(currentGame, baseFolderPath);
             var gameInfo = gameData.GetGameInfo(currentGame);
 
             clbBosses.Items.Clear();
             cbxRestrictions.Items.Clear();
             int completed = gameInfo.Bosses!.Count(b => b.Completed);
 
-            gameInfo.Bosses.ForEach(b => clbBosses.Items.Add(b.Name!));
+            gameInfo.Bosses!.ForEach(b => clbBosses.Items.Add(b.Name!));
             cbxRestrictions.Items.AddRange(gameInfo.Restrictions!.Select(r => r.Name).ToArray());
 
             lblBosses.Text = $"{completed}/{clbBosses.Items.Count}";
 
-            // Save all completed bosses to dict
-            SaveCompletedBosses();
+            CheckCompletedBosses();
         }
+
+        private async Task LoadGameDataAsync(string gameName, string baseFolderPath) =>
+            await Task.Run(() => gameData.LoadGameData(gameName, baseFolderPath));
 
         private void clbBosses_ItemCheck(object sender, ItemCheckEventArgs e)
         {
@@ -165,12 +139,12 @@ namespace SoulsChallengeApp
             lblBosses.Text = $"{bossCount}/{clbBosses.Items.Count}";
 
             string bossName = clbBosses.Items[e.Index].ToString()!;
-            Boss selectedBoss = bossList.FirstOrDefault(b => b.Name == bossName)!;
+            var selectedBoss = bossList.FirstOrDefault(b => b.Name == bossName)!;
 
-            if (e.NewValue == CheckState.Checked)
-                selectedBoss.Completed = true;
-            else
-                selectedBoss.Completed = false;
+            selectedBoss.Completed = e.NewValue == CheckState.Checked;
+
+            var completedBosses = bossList.Where(b => b.Completed).ToList();
+            gameData.UpdateCompletedBosses(currentGame, completedBosses);
 
             CheckRunType();
         }
@@ -181,41 +155,36 @@ namespace SoulsChallengeApp
             {
                 currentRunType = (RunType)radioButton.Tag;
 
-                if (currentRunType == RunType.Legend)
-                {
-                    cbxRestrictions.Enabled = true;
-                }
-                else
-                {
-                    cbxRestrictions.Enabled = false;
-                    cbxRestrictions.SelectedItem = null;
-                }
+                cbxRestrictions.Enabled = currentRunType == RunType.Legend;
+                cbxRestrictions.SelectedItem = null;
 
                 CheckRunType();
             }
         }
 
-        private void btnSubmit_Click(object sender, EventArgs e)
+        private async void btnSubmit_Click(object sender, EventArgs e)
         {
-            string gameFolderPath = Path.Combine(baseFolderPath, currentGame);
-            string submissionPath = Path.Combine(gameFolderPath, "Submission.txt");
+            string submissionURL = SubmissionTemplate
+                .Replace("{Category}", currentRunType.ToString())
+                .Replace("{Restriction}", FindRunTypes());
 
-            string submissionTemplate = File.ReadAllText(submissionPath);
-
-            string category = currentRunType.ToString()!;
-            string restriction = FindRunTypes();
-            string submissionURL = submissionTemplate
-                .Replace("{Category}", category)
-                .Replace("{Restriction}", restriction);
-
-            ProcessStartInfo psi = new ProcessStartInfo
-            {
-                FileName = submissionURL,
-                UseShellExecute = true
-            };
-
-            Process.Start(psi);
+            await OpenSubmissionURLAsync(submissionURL);
         }
+
+        private async Task OpenSubmissionURLAsync(string url)
+        {
+            await Task.Run(() =>
+            {
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                };
+
+                using (Process.Start(psi)) { }
+            });
+        }
+
 
         private void btnReset_Click(object sender, EventArgs e)
         {
@@ -230,14 +199,13 @@ namespace SoulsChallengeApp
 
         private void btnRules_Click(object sender, EventArgs e)
         {
-            string rulesURL = @"https://docs.google.com/document/d/1Hffx3O7SavIRUErIeLXMvRQ5yH6Lx1Xs9ZFuPqglvr4/edit";
             ProcessStartInfo psi = new ProcessStartInfo
             {
-                FileName = rulesURL,
+                FileName = RulesURL,
                 UseShellExecute = true
             };
 
-            Process.Start(psi);
+            using (Process.Start(psi)) { }
         }
 
         private void btnMode_Click(object sender, EventArgs e)
@@ -289,34 +257,33 @@ namespace SoulsChallengeApp
         {
             isDarkMode = Properties.Settings.Default.UserSelectedMode;
             SetMode(isDarkMode);
+
+            string gameDataJson = Properties.Settings.Default.CompletedBosses;
+            gameData.DeserializeGameDataFromJson(gameDataJson);
         }
 
         private void BossForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var completedBosses = bossList.Where(b => b.Completed).ToList();
-            completedBossesDict[currentGame] = completedBosses;
-
-            var json = JsonConvert.SerializeObject(completedBossesDict);
-            Properties.Settings.Default.CompletedBosses = json;
+            var gameDataJson = gameData.SerializeGameDataToJson();
+            Properties.Settings.Default.CompletedBosses = gameDataJson;
         }
 
-        private void SaveCompletedBosses()
+        private void CheckCompletedBosses()
         {
-            // Get all completed bosses from application settings
-            string? allCompletedBosses = Properties.Settings.Default.CompletedBosses;
-
-            if (!string.IsNullOrEmpty(allCompletedBosses))
+            string completedBossesJson = Properties.Settings.Default.CompletedBosses;
+            if (!string.IsNullOrEmpty(completedBossesJson))
             {
-                completedBossesDict = JsonConvert.DeserializeObject<Dictionary<string, List<Boss>>>(allCompletedBosses);
+                var completedBosses = JsonConvert.DeserializeObject<Dictionary<string, GameInfo>>(completedBossesJson);
 
-                if (completedBossesDict!.TryGetValue(currentGame, out var completedBosses))
+                if (completedBosses!.TryGetValue(currentGame, out var gameData))
                 {
+                    var completedBossNames = gameData.Bosses!.Where(boss => boss.Completed)
+                        .Select(boss => boss.Name).ToList();
+
                     for (int i = 0; i < clbBosses.Items.Count; i++)
                     {
-                        string bossName = clbBosses.Items[i].ToString();
-                        bool isChecked = completedBosses.Any(b => b.Name == bossName && b.Completed);
-
-                        clbBosses.SetItemChecked(i, isChecked);
+                        string bossName = clbBosses.Items[i].ToString()!;
+                        clbBosses.SetItemChecked(i, completedBossNames.Contains(bossName));
                     }
                 }
             }
