@@ -106,7 +106,6 @@ namespace SoulsChallengeApp
 
             CheckRunType();
         }
-
         private void rb_CheckedChanged(object sender, EventArgs e)
         {
             if (sender is RadioButton radioButton)
@@ -134,6 +133,19 @@ namespace SoulsChallengeApp
         }
         private async void btnSubmit_Click(object sender, EventArgs e)
         {
+            // Checks
+            if (currentRunType == null)
+            {
+                MessageBox.Show("Please select a Run Type", "Run Type Required");
+                return;
+            }
+
+            if (currentRunType == RunType.Legend && cbxRestrictions.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a restriction for your Legend Run!", "Restriction Required");
+                return;
+            }
+
             // Entry IDS
             string entryRadio = "entry.1804428826=";
             string entryCheck = "&entry.805188992=";
@@ -151,12 +163,12 @@ namespace SoulsChallengeApp
                 .Replace("{Category}", category)
                 .Replace("{Restrictions}", restrictionsParameters);
 
-            string restriction = cbxRestrictions.SelectedItem.ToString()!;
+            string restriction = cbxRestrictions.SelectedItem?.ToString()!;
             string otherRestriction = HttpUtility.UrlEncode(restriction);
 
             submissionURL += $"{entryOther}{otherRestriction}";
 
-            DialogResult result = MessageBox.Show($"Congratulations on completing your run for {currentGame}: \n{restriction}!\n" +
+            DialogResult result = MessageBox.Show($"Congratulations on completing your run for {currentGame}: \n{restriction}\n" +
                 $"You will be redirected to the Google Submission Form.\n" +
                 "Would you like to continue?", "Submission Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
