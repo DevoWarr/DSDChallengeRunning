@@ -292,11 +292,20 @@ namespace SoulsChallengeApp
             };
 
             string selectedRestriction = cbxRestrictions.Text;
+            var restrictions = new List<string>();
 
-            var restrictions = types
+            if (selectedRestriction.Contains(types[0]))
+            {
+                restrictions.Add("Max Ng");
+            }
+            else
+            {
+                restrictions = types
                 .Where(type => selectedRestriction.Contains(type))
                 .Select(type => HttpUtility.UrlEncode(type))
                 .ToList();
+
+            }
 
             if (restrictions.Count == 0)
                 restrictions.Add("Other");
