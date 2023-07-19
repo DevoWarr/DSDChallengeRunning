@@ -1,21 +1,21 @@
-Adjudicator
-Armor Spider
-Blue Dragon
-Dirty Colossus
-Dragon God
-Flamelurker
-Fool's Idol
-Old King Allant
-Leechmonger
-Maneater
-Maiden Astraea
 Vanguard
-Old Hero
+Phalanx
 Tower Knight
+Armor Spider
+Fool's Idol
+Adjudicator
+Old Hero
+Maneater
+Flamelurker
+Dragon God
+Storm King
+Leechmonger
+Dirty Colossus
 Old Monk
 Penetrator
-Phalanx
-Primeval Demon
+Maiden Astraea
 Red Dragon
-Storm King
+Blue Dragon
+Primeval Demon
+Old King Allant
 King Allant

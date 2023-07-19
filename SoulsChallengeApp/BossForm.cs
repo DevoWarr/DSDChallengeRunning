@@ -1,5 +1,12 @@
-﻿using SoulsChallengeApp.Models;
+﻿using Newtonsoft.Json;
+using SoulsChallengeApp.Models;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace SoulsChallengeApp
 {
@@ -8,7 +15,9 @@ namespace SoulsChallengeApp
         // Variables
         private static string baseFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Games");
         private GameData gameData;
-        private List<Boss> bossList = new List<Boss>();
+        private string currentGame;
+        private Dictionary<string, List<Boss>> completedBossesDict = new Dictionary<string, List<Boss>>();
+        public List<Boss> bossList = new List<Boss>();
         private RunType? currentRunType;
         private int bossCount;
         private bool isDarkMode = false;
@@ -131,28 +140,41 @@ namespace SoulsChallengeApp
         // Events
         private void cbxGames_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string name = cbxGames.Text;
+            currentGame = cbxGames.Text;
 
-            gameData.LoadGameData(name, baseFolderPath);
+            gameData.LoadGameData(currentGame, baseFolderPath);
 
-            var gameInfo = gameData.GetGameInfo(name);
+            var gameInfo = gameData.GetGameInfo(currentGame);
 
             clbBosses.Items.Clear();
             cbxRestrictions.Items.Clear();
-            int checkedCount = gameInfo.Bosses.Count(b => b.Completed);
+            int completed = gameInfo.Bosses!.Count(b => b.Completed);
 
             gameInfo.Bosses.ForEach(b => clbBosses.Items.Add(b.Name!));
-            cbxRestrictions.Items.AddRange(gameInfo.Restrictions.Select(r => r.Name).ToArray());
+            cbxRestrictions.Items.AddRange(gameInfo.Restrictions!.Select(r => r.Name).ToArray());
 
-            lblBosses.Text = $"{checkedCount}/{clbBosses.Items.Count}";
+            lblBosses.Text = $"{completed}/{clbBosses.Items.Count}";
+
+            // Save all completed bosses to dict
+            SaveCompletedBosses();
         }
+
         private void clbBosses_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             bossCount = clbBosses.CheckedItems.Count + (e.NewValue == CheckState.Checked ? 1 : -1);
             lblBosses.Text = $"{bossCount}/{clbBosses.Items.Count}";
 
+            string bossName = clbBosses.Items[e.Index].ToString()!;
+            Boss selectedBoss = bossList.FirstOrDefault(b => b.Name == bossName)!;
+
+            if (e.NewValue == CheckState.Checked)
+                selectedBoss.Completed = true;
+            else
+                selectedBoss.Completed = false;
+
             CheckRunType();
         }
+
         private void rb_CheckedChanged(object sender, EventArgs e)
         {
             if (sender is RadioButton radioButton)
@@ -172,10 +194,10 @@ namespace SoulsChallengeApp
                 CheckRunType();
             }
         }
+
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            string gameName = cbxGames.Text;
-            string gameFolderPath = Path.Combine(baseFolderPath, gameName);
+            string gameFolderPath = Path.Combine(baseFolderPath, currentGame);
             string submissionPath = Path.Combine(gameFolderPath, "Submission.txt");
 
             string submissionTemplate = File.ReadAllText(submissionPath);
@@ -194,11 +216,18 @@ namespace SoulsChallengeApp
 
             Process.Start(psi);
         }
+
         private void btnReset_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < clbBosses.Items.Count; i++)
                 clbBosses.SetItemChecked(i, false);
+
+            bossCount = 0;
+            lblBosses.Text = $"{bossCount}/{clbBosses.Items.Count}";
+
+            CheckRunType();
         }
+
         private void btnRules_Click(object sender, EventArgs e)
         {
             string rulesURL = @"https://docs.google.com/document/d/1Hffx3O7SavIRUErIeLXMvRQ5yH6Lx1Xs9ZFuPqglvr4/edit";
@@ -214,17 +243,8 @@ namespace SoulsChallengeApp
         private void btnMode_Click(object sender, EventArgs e)
         {
             isDarkMode = !isDarkMode;
-
-            if (isDarkMode)
-            {
-                SetDarkMode();
-                btnMode.Text = "Light Mode";
-            }
-            else
-            {
-                SetLightMode();
-                btnMode.Text = "Dark Mode";
-            }
+            Properties.Settings.Default.UserSelectedMode = isDarkMode;
+            SetMode(isDarkMode);
         }
 
         // UI
@@ -235,6 +255,7 @@ namespace SoulsChallengeApp
             clbBosses.BackColor = ColorThemes.BossesLight;
             clbBosses.ForeColor = ColorThemes.ForegroundLight;
         }
+
         private void SetDarkMode()
         {
             BackColor = ColorThemes.BackgroundDark;
@@ -247,6 +268,56 @@ namespace SoulsChallengeApp
                 if (control is Button button)
                 {
                     button.ForeColor = ColorThemes.ForegroundLight;
+                }
+            }
+        }
+
+        private void SetMode(bool isDarkMode)
+        {
+            if (isDarkMode)
+            {
+                SetDarkMode();
+                btnMode.Text = "Light Mode";
+            }
+            else
+            {
+                SetLightMode();
+                btnMode.Text = "Dark Mode";
+            }
+        }
+        private void BossForm_Load(object sender, EventArgs e)
+        {
+            isDarkMode = Properties.Settings.Default.UserSelectedMode;
+            SetMode(isDarkMode);
+        }
+
+        private void BossForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var completedBosses = bossList.Where(b => b.Completed).ToList();
+            completedBossesDict[currentGame] = completedBosses;
+
+            var json = JsonConvert.SerializeObject(completedBossesDict);
+            Properties.Settings.Default.CompletedBosses = json;
+        }
+
+        private void SaveCompletedBosses()
+        {
+            // Get all completed bosses from application settings
+            string? allCompletedBosses = Properties.Settings.Default.CompletedBosses;
+
+            if (!string.IsNullOrEmpty(allCompletedBosses))
+            {
+                completedBossesDict = JsonConvert.DeserializeObject<Dictionary<string, List<Boss>>>(allCompletedBosses);
+
+                if (completedBossesDict!.TryGetValue(currentGame, out var completedBosses))
+                {
+                    for (int i = 0; i < clbBosses.Items.Count; i++)
+                    {
+                        string bossName = clbBosses.Items[i].ToString();
+                        bool isChecked = completedBosses.Any(b => b.Name == bossName && b.Completed);
+
+                        clbBosses.SetItemChecked(i, isChecked);
+                    }
                 }
             }
         }

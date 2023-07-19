@@ -22,14 +22,27 @@ namespace SoulsChallengeApp.Models
             var bossList = bossNames.Select(b => new Boss { Name = b, Completed = false }).ToList();
             var restrictionList = restrictionNames.Select(r => new Restriction { Name = r }).ToList();
 
-            GameInfo newGameInfo = new GameInfo
+            // Check if the key already exists in the dictionary
+            if (gamesData.ContainsKey(name))
             {
-                Bosses = bossList,
-                Restrictions = restrictionList
-            };
-
-            gamesData.Add(name, newGameInfo);
+                // If it exists, update the existing entry
+                gamesData[name].GameName = name;
+                gamesData[name].Bosses = bossList;
+                gamesData[name].Restrictions = restrictionList;
+            }
+            else
+            {
+                // If it doesn't exist, add a new entry
+                GameInfo newGameInfo = new GameInfo
+                {
+                    GameName = name,
+                    Bosses = bossList,
+                    Restrictions = restrictionList
+                };
+                gamesData.Add(name, newGameInfo);
+            }
         }
+
 
         public GameInfo GetGameInfo(string name)
         {

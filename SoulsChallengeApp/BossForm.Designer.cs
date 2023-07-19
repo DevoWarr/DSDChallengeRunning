@@ -94,11 +94,12 @@
             cbxRestrictions.Cursor = Cursors.Hand;
             cbxRestrictions.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxRestrictions.Enabled = false;
+            cbxRestrictions.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
             cbxRestrictions.FormattingEnabled = true;
             cbxRestrictions.Items.AddRange(new object[] { "None" });
             cbxRestrictions.Location = new Point(192, 60);
             cbxRestrictions.Name = "cbxRestrictions";
-            cbxRestrictions.Size = new Size(395, 28);
+            cbxRestrictions.Size = new Size(395, 25);
             cbxRestrictions.TabIndex = 11;
             // 
             // label2
@@ -255,8 +256,12 @@
             Controls.Add(label1);
             Controls.Add(cbxGames);
             Controls.Add(clbBosses);
+            MaximizeBox = false;
             Name = "BossForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "BossForm";
+            FormClosing += BossForm_FormClosing;
+            Load += BossForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
