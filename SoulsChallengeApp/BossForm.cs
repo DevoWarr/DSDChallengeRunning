@@ -1,25 +1,20 @@
 ﻿using Newtonsoft.Json;
 using SoulsChallengeApp.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
+using System.Runtime.Intrinsics.X86;
+using System.Web;
 
 namespace SoulsChallengeApp
 {
     public partial class BossForm : Form
     {
         // Constants
-        private const string SubmissionTemplate = "{Category}/{Restriction}";
         private const string RulesURL = @"https://docs.google.com/document/d/1Hffx3O7SavIRUErIeLXMvRQ5yH6Lx1Xs9ZFuPqglvr4/edit";
 
         // Variables
-        private static string baseFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Games");
+        private static string basePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Games");
         private GameData gameData;
-        private string currentGame;
+        private string currentGame = string.Empty;
         public List<Boss> bossList = new List<Boss>();
         private RunType? currentRunType;
         private int bossCount;
@@ -47,7 +42,7 @@ namespace SoulsChallengeApp
         // Fills
         private void FillAllBosses()
         {
-            string[] folders = Directory.GetDirectories(baseFolderPath);
+            string[] folders = Directory.GetDirectories(basePath);
 
             foreach (string folder in folders)
             {
@@ -77,29 +72,28 @@ namespace SoulsChallengeApp
         }
 
         // Runtypes
-        private string FindRunTypes()
+        private List<string> FindRunTypes()
         {
-            var types = new Dictionary<string, string>
+            var types = new List<string>
             {
-                { "NG", "Max+Ng" },             // MAX NG
-                { "+0", "%2B0" },               // +0 WEAPON
-                { "No Roll", "No+Roll" },       // NO ROLL
-                { "Deathless", "Deathless" },   // DEATHLESS
-                { "NoHit", "No+Hit" }           // NO HIT
+                "NG", "CoC", "Broken Thief Sword", "Broken Straight Sword", "+0",
+                "No Roll", "Deathless", "NoHit", "NG+ 7 No Aux", "No Roll/Block/Parry", "+0 Weapons No Aux",
+                "No Deflect", "No Items", "Sword Only", "Base Att", "Hardmode"
             };
 
             string selectedRestriction = cbxRestrictions.Text;
 
-            foreach (var type in types)
-            {
-                if (selectedRestriction.Contains(type.Key))
-                {
-                    return type.Value;
-                }
-            }
+            var restrictions = types
+                .Where(type => selectedRestriction.Contains(type))
+                .Select(type => HttpUtility.UrlEncode(type))
+                .ToList();
 
-            return "Other";
+            if (restrictions.Count == 0)
+                restrictions.Add("Other");
+
+            return restrictions;
         }
+
         private void CheckRunType()
         {
             bool completedRun = bossCount == clbBosses.Items.Count;
@@ -115,7 +109,7 @@ namespace SoulsChallengeApp
         {
             currentGame = cbxGames.Text;
 
-            await LoadGameDataAsync(currentGame, baseFolderPath);
+            await LoadGameDataAsync(currentGame, basePath);
             var gameInfo = gameData.GetGameInfo(currentGame);
 
             clbBosses.Items.Clear();
@@ -164,14 +158,37 @@ namespace SoulsChallengeApp
 
         private async void btnSubmit_Click(object sender, EventArgs e)
         {
-            string submissionURL = SubmissionTemplate
-                .Replace("{Category}", currentRunType.ToString())
-                .Replace("{Restriction}", FindRunTypes());
+            // Entry IDS
+            string entryRadio = "entry.1804428826=";
+            string entryCheck = "&entry.805188992=";
+            string entryOther = "&entry.1655991278=";
 
-            await OpenSubmissionURLAsync(submissionURL);
+            string gamePath = Path.Combine(basePath, currentGame, "Submission.txt");
+            string submissionTemplate = File.ReadAllText(gamePath);
+
+            string category = $"{entryRadio}{currentRunType}";
+
+            var restrictions = FindRunTypes();
+            string restrictionsParameters = string.Join("&", restrictions.Select((r, i) => $"{entryCheck}{r}"));
+
+            string submissionURL = submissionTemplate
+                .Replace("{Category}", category)
+                .Replace("{Restrictions}", restrictionsParameters);
+
+            string restriction = cbxRestrictions.SelectedItem.ToString()!;
+            string otherRestriction = HttpUtility.UrlEncode(restriction);
+
+            submissionURL += $"{entryOther}{otherRestriction}";
+            DialogResult result = MessageBox.Show($"Congratulations on completing your run for {currentGame}: \n{restriction}!\n" +
+                $"You will be redirected to the Google Submission Form.\n" +
+                "Would you like to continue?", "Submission Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+                await OpenURLAsync(submissionURL);
+            else return;
         }
 
-        private async Task OpenSubmissionURLAsync(string url)
+        private async Task OpenURLAsync(string url)
         {
             await Task.Run(() =>
             {
@@ -197,15 +214,9 @@ namespace SoulsChallengeApp
             CheckRunType();
         }
 
-        private void btnRules_Click(object sender, EventArgs e)
+        private async void btnRules_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo psi = new ProcessStartInfo
-            {
-                FileName = RulesURL,
-                UseShellExecute = true
-            };
-
-            using (Process.Start(psi)) { }
+            await OpenURLAsync(RulesURL);
         }
 
         private void btnMode_Click(object sender, EventArgs e)
@@ -259,7 +270,7 @@ namespace SoulsChallengeApp
             SetMode(isDarkMode);
 
             string gameDataJson = Properties.Settings.Default.CompletedBosses;
-            gameData.DeserializeGameDataFromJson(gameDataJson);
+            gameData?.DeserializeGameDataFromJson(gameDataJson);
         }
 
         private void BossForm_FormClosing(object sender, FormClosingEventArgs e)

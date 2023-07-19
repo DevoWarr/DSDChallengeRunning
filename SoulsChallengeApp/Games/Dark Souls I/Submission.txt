@@ -1,1 +1,1 @@
-https://docs.google.com/forms/d/e/1FAIpQLSdsUW9iaaz-8FovqiBb6jJpQt_BvlCIf8suHcRucBivnoJdnw/viewform?entry.1804428826={Category}&entry.805188992={Restriction}
+https://docs.google.com/forms/d/e/1FAIpQLSdsUW9iaaz-8FovqiBb6jJpQt_BvlCIf8suHcRucBivnoJdnw/viewform?{Category}{Restrictions}

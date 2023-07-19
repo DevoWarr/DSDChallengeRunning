@@ -11,11 +11,11 @@ namespace SoulsChallengeApp.Models
     {
         private static Dictionary<string, GameInfo> gamesData = new Dictionary<string, GameInfo>();
 
-        public void LoadGameData(string name, string baseFolderPath)
+        public void LoadGameData(string name, string basePath)
         {
-            string gameFolderPath = Path.Combine(baseFolderPath, name);
-            string bossPath = Path.Combine(gameFolderPath, "Bosses.txt");
-            string restrictionsPath = Path.Combine(gameFolderPath, "Restrictions.txt");
+            string gamePath = Path.Combine(basePath, name);
+            string bossPath = Path.Combine(gamePath, "Bosses.txt");
+            string restrictionsPath = Path.Combine(gamePath, "Restrictions.txt");
 
             string[] bossNames = File.ReadAllLines(bossPath);
             string[] restrictionNames = File.ReadAllLines(restrictionsPath);
