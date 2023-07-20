@@ -119,7 +119,6 @@ namespace SoulsChallengeApp
             }
         }
 
-
         // Button Events
         private void btnReset_Click(object sender, EventArgs e)
         {
@@ -172,13 +171,14 @@ namespace SoulsChallengeApp
                 $"You will be redirected to the Google Submission Form.\n" +
                 "Would you like to continue?", "Submission Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (result == DialogResult.Yes)
-                await OpenURLAsync(submissionURL);
-            else return;
+            if (result == DialogResult.Yes) await OpenURLAsync(submissionURL);
         }
         private async void btnRules_Click(object sender, EventArgs e)
         {
-            await OpenURLAsync(RulesURL);
+            DialogResult result = MessageBox.Show("Go to DSD Challenge Run Rules Document?",
+                "Challenge Run Rules", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes) await OpenURLAsync(RulesURL);
         }
         private void btnMode_Click(object sender, EventArgs e)
         {
@@ -234,26 +234,7 @@ namespace SoulsChallengeApp
                 gameData?.DeserializeGameDataFromJson(Properties.Settings.Default.CompletedBosses);
 
             // GitHub
-            GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue("SoulsChallenge"));
-            try
-            {
-                Release release = await gitHubClient.Repository.Release.GetLatest("DevoWarr", "SoulsChallenge");
-
-                if (SemVersion.Parse(release.TagName) > System.Windows.Forms.Application.ProductVersion)
-                {
-                    DialogResult result = MessageBox.Show("New Update Available\n" +
-                        "Would you like to update to the latest version?",
-                        "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                    if (result == DialogResult.Yes)
-                        await OpenURLAsync(release.HtmlUrl);
-                    else return;
-                }
-            }
-            catch (Exception ex) when (ex is HttpRequestException || ex is ApiException || ex is ArgumentException)
-            {
-                MessageBox.Show("App Version Unknown!", "Unknown App Version");
-            }
+            await CheckGitHubUpdates();
         }
         private void BossForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -333,6 +314,28 @@ namespace SoulsChallengeApp
 
                 using (Process.Start(psi)) { }
             });
+        }
+        private async Task CheckGitHubUpdates()
+        {
+            GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue("SoulsChallenge"));
+            try
+            {
+                Release release = await gitHubClient.Repository.Release.GetLatest("DevoWarr", "SoulsChallenge");
+                var latestVersion = SemVersion.Parse(release.TagName);
+
+                if (latestVersion > System.Windows.Forms.Application.ProductVersion)
+                {
+                    DialogResult result = MessageBox.Show("New Update Available\n" +
+                        "Would you like to update to the latest version?",
+                        "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes) await OpenURLAsync(release.HtmlUrl);
+                }
+            }
+            catch (Exception ex) when (ex is HttpRequestException || ex is ApiException || ex is ArgumentException)
+            {
+                MessageBox.Show("App Version Unknown!", "Unknown App Version");
+            }
         }
         private async Task LoadGameDataAsync(string gameName, string basePath) =>
     await Task.Run(() => gameData.LoadGameData(gameName, basePath));
