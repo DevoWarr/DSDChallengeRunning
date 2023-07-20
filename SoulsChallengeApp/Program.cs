@@ -1,6 +1,4 @@
-using System.Configuration;
-
-namespace SoulsChallengeApp
+namespace DSD_App
 {
     internal static class Program
     {
@@ -11,12 +9,6 @@ namespace SoulsChallengeApp
         static void Main()
         {
             Properties.Settings settings = Properties.Settings.Default;
-
-            if (settings.UpgradeRequired)
-            {
-                settings.Upgrade();
-                settings.UpgradeRequired = false;
-            }
 
             ApplicationConfiguration.Initialize();
             Application.Run(new BossForm());

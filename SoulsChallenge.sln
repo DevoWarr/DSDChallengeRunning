@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoulsChallengeApp", "SoulsChallengeApp\SoulsChallengeApp.csproj", "{1B1F5472-78D4-4A2C-8D09-8403B863D0C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSD_App", "SoulsChallengeApp\DSD_App.csproj", "{1B1F5472-78D4-4A2C-8D09-8403B863D0C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-﻿namespace SoulsChallengeApp.Models
+﻿namespace DSD_App.Models
 {
     public class Boss
     {

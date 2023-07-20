@@ -1,4 +1,4 @@
-﻿namespace SoulsChallengeApp
+﻿namespace DSD_App
 {
     partial class BossForm
     {
@@ -22,10 +22,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BossForm));

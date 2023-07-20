@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 using Octokit;
 using Semver;
-using SoulsChallengeApp.Models;
+using DSD_App.Models;
 using System.Diagnostics;
 using System.Text;
 using System.Web;
 
-namespace SoulsChallengeApp
+namespace DSD_App
 {
     public partial class BossForm : Form
     {
@@ -17,6 +17,7 @@ namespace SoulsChallengeApp
 
         // Variables
         private static string basePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Games");
+        private Version assemblyVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version!;
         private GameData gameData;
         private string currentGame = Properties.Settings.Default.CurrentGame;
         public List<Boss> bossList = new List<Boss>();
@@ -27,7 +28,6 @@ namespace SoulsChallengeApp
         public BossForm()
         {
             InitializeComponent();
-            Text = $"DSD Challenge Running {System.Windows.Forms.Application.ProductVersion}";
             gameData = new GameData();
 
             InitializeRunTypes();
@@ -278,6 +278,7 @@ namespace SoulsChallengeApp
         }
 
         // BossForm
+        [Obsolete]
         private async void BossForm_Load(object sender, EventArgs e)
         {
             isDarkMode = Properties.Settings.Default.UserSelectedMode;
@@ -410,15 +411,22 @@ namespace SoulsChallengeApp
                 using (Process.Start(psi)) { }
             });
         }
+
+        [Obsolete]
         private async Task CheckGitHubUpdates()
         {
             GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue("DSDChallengeRunning"));
+            string assemblySemverString = string.Empty;
+
             try
             {
                 Release release = await gitHubClient.Repository.Release.GetLatest("DevoWarr", "DSDChallengeRunning");
+                
                 var latestVersion = SemVersion.Parse(release.TagName);
+                assemblySemverString = new Version(assemblyVersion.Major, assemblyVersion.Minor, assemblyVersion.Build).ToString();
+                var assemblySemver = SemVersion.Parse(assemblySemverString);
 
-                if (latestVersion > System.Windows.Forms.Application.ProductVersion)
+                if (latestVersion > assemblySemver)
                 {
                     DialogResult result = MessageBox.Show("New Update Available\n" +
                         "Would you like to update to the latest version?",
@@ -431,6 +439,8 @@ namespace SoulsChallengeApp
             {
                 MessageBox.Show("App Version Unknown!", "Unknown App Version");
             }
+
+            Text = $"DSD Challenge Running {assemblySemverString}";
         }
         private void SaveGameData()
         {

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SoulsChallengeApp.Models
+namespace DSD_App.Models
 {
     public class GameData
     {
