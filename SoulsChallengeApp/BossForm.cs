@@ -230,8 +230,8 @@ namespace SoulsChallengeApp
             isDarkMode = Properties.Settings.Default.UserSelectedMode;
             SetMode(isDarkMode);
 
-            string gameDataJson = Properties.Settings.Default.CompletedBosses;
-            gameData?.DeserializeGameDataFromJson(gameDataJson);
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.CompletedBosses))
+                gameData?.DeserializeGameDataFromJson(Properties.Settings.Default.CompletedBosses);
 
             // GitHub
             GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue("SoulsChallenge"));
