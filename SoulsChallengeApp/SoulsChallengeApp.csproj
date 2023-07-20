@@ -102,7 +102,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\DSD_Icon.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Resources\LightMode_Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
