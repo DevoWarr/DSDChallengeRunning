@@ -11,6 +11,7 @@ namespace SoulsChallengeApp
     {
         // Constants
         private const string RulesURL = @"https://docs.google.com/document/d/1Hffx3O7SavIRUErIeLXMvRQ5yH6Lx1Xs9ZFuPqglvr4/edit";
+        private const string DiscordURL = @"https://discord.gg/invite/darksouls3";
 
         // Variables
         private static string basePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Games");
@@ -93,7 +94,10 @@ namespace SoulsChallengeApp
 
             lblBosses.Text = $"{completed}/{clbBosses.Items.Count}";
 
-            CheckCompletedBosses();
+            TickCompletedBosses();
+            CheckCompletedRun();
+
+            SaveGameData();
         }
         private void clbBosses_ItemCheck(object sender, ItemCheckEventArgs e)
         {
@@ -108,7 +112,8 @@ namespace SoulsChallengeApp
             var completedBosses = bossList.Where(b => b.Completed).ToList();
             gameData.UpdateCompletedBosses(currentGame, completedBosses);
 
-            CheckRunType();
+            CheckCompletedRun();
+            SaveGameData();
         }
         private void rb_CheckedChanged(object sender, EventArgs e)
         {
@@ -119,20 +124,26 @@ namespace SoulsChallengeApp
                 cbxRestrictions.Enabled = currentRunType == RunType.Legend;
                 cbxRestrictions.SelectedItem = null;
 
-                CheckRunType();
+                CheckCompletedRun();
             }
         }
 
         // Button Events
         private void btnReset_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < clbBosses.Items.Count; i++)
-                clbBosses.SetItemChecked(i, false);
+            DialogResult result = MessageBox.Show($"Would you like to reset progress for {currentGame}?", $"Reset {currentGame} Bosslist",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            bossCount = 0;
-            lblBosses.Text = $"{bossCount}/{clbBosses.Items.Count}";
+            if (result == DialogResult.Yes)
+            {
+                for (int i = 0; i < clbBosses.Items.Count; i++)
+                    clbBosses.SetItemChecked(i, false);
 
-            CheckRunType();
+                bossCount = 0;
+                lblBosses.Text = $"{bossCount}/{clbBosses.Items.Count}";
+
+                CheckCompletedRun();
+            }
         }
         private async void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -184,8 +195,6 @@ namespace SoulsChallengeApp
 
             if (result == DialogResult.Yes) await OpenURLAsync(submissionURL);
         }
-
-
         private async void btnRules_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Go to DSD Challenge Run Rules Document?",
@@ -222,19 +231,23 @@ namespace SoulsChallengeApp
                     button.ForeColor = ColorThemes.ForegroundLight;
                 }
             }
+
+            btnSubmit.ForeColor = ColorThemes.ForegroundDark;
         }
         private void SetMode(bool isDarkMode)
         {
             if (isDarkMode)
             {
                 SetDarkMode();
-                btnMode.Text = "Light Mode";
+                btnMode.Image = new Bitmap(Properties.Resources.LightMode, new Size(32, 32));
             }
             else
             {
                 SetLightMode();
-                btnMode.Text = "Dark Mode";
+                btnMode.Image = new Bitmap(Properties.Resources.DarkMode, new Size(32, 32));
             }
+
+            btnSubmit.ForeColor = ColorThemes.ForegroundDark;
         }
 
         // BossForm
@@ -246,18 +259,18 @@ namespace SoulsChallengeApp
             if (!string.IsNullOrEmpty(Properties.Settings.Default.CompletedBosses))
                 gameData?.DeserializeGameDataFromJson(Properties.Settings.Default.CompletedBosses);
 
-            // GitHub
+            TickRunType();
+
+            // GitHub Updates
             await CheckGitHubUpdates();
         }
         private void BossForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var gameDataJson = gameData.SerializeGameDataToJson();
-            Properties.Settings.Default.CurrentGame = currentGame;
-            Properties.Settings.Default.CompletedBosses = gameDataJson;
+            SaveGameData();
         }
 
         // Methods
-        private void CheckCompletedBosses()
+        private void TickCompletedBosses()
         {
             string completedBossesJson = Properties.Settings.Default.CompletedBosses;
             if (!string.IsNullOrEmpty(completedBossesJson))
@@ -276,6 +289,30 @@ namespace SoulsChallengeApp
                     }
                 }
             }
+        }
+        private void TickRunType()
+        {
+            string currentRunType = Properties.Settings.Default.CurrentRunType;
+
+            if (Enum.TryParse(currentRunType, out RunType selectedRunType))
+            {
+                switch (selectedRunType)
+                {
+                    case RunType.Casual:
+                        rbCasual.Checked = true;
+                        break;
+                    case RunType.Champion:
+                        rbChampion.Checked = true;
+                        break;
+                    case RunType.Legend:
+                        rbLegend.Checked = true;
+                        break;
+                    default:
+                        rbCasual.Checked = true;
+                        break;
+                }
+            }
+
         }
         private List<string> FindRunTypes()
         {
@@ -307,7 +344,7 @@ namespace SoulsChallengeApp
 
             return restrictions;
         }
-        private void CheckRunType()
+        private void CheckCompletedRun()
         {
             bool completedRun = bossCount == clbBosses.Items.Count;
 
@@ -315,6 +352,11 @@ namespace SoulsChallengeApp
 
             lblCompletion.Text = completedRun ? "COMPLETED" : "UNCOMPLETED";
             lblCompletion.ForeColor = completedRun ? Color.Green : Color.Red;
+
+            if (currentRunType != RunType.Casual)
+                btnSubmit.BackColor = completedRun ? Color.Green : Color.Red;
+            else
+                btnSubmit.BackColor = Color.Red;
         }
         private async Task OpenURLAsync(string url)
         {
@@ -351,8 +393,22 @@ namespace SoulsChallengeApp
                 MessageBox.Show("App Version Unknown!", "Unknown App Version");
             }
         }
+        private void SaveGameData()
+        {
+            var gameDataJson = gameData.SerializeGameDataToJson();
+            Properties.Settings.Default.CurrentGame = currentGame;
+            Properties.Settings.Default.CurrentRunType = currentRunType.ToString();
+            Properties.Settings.Default.CompletedBosses = gameDataJson;
+        }
         private async Task LoadGameDataAsync(string gameName, string basePath) =>
             await Task.Run(() => gameData.LoadGameData(gameName, basePath));
 
+        private async void btnDiscord_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Would you like to join the DSD Discord Server?", "DSD Discord",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes) await OpenURLAsync(DiscordURL);
+        }
     }
 }

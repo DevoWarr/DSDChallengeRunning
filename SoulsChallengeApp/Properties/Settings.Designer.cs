@@ -62,6 +62,18 @@ namespace SoulsChallengeApp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CurrentRunType {
+            get {
+                return ((string)(this["CurrentRunType"]));
+            }
+            set {
+                this["CurrentRunType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string CompletedBosses {
             get {
                 return ((string)(this["CompletedBosses"]));

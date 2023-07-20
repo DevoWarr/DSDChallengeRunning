@@ -45,6 +45,7 @@
             btnRules = new Button();
             btnMode = new Button();
             label4 = new Label();
+            btnDiscord = new Button();
             SuspendLayout();
             // 
             // clbBosses
@@ -120,6 +121,7 @@
             // 
             btnSubmit.Cursor = Cursors.Hand;
             resources.ApplyResources(btnSubmit, "btnSubmit");
+            btnSubmit.ForeColor = SystemColors.ControlText;
             btnSubmit.Name = "btnSubmit";
             btnSubmit.UseVisualStyleBackColor = true;
             btnSubmit.Click += btnSubmit_Click;
@@ -153,10 +155,11 @@
             // 
             // btnMode
             // 
-            btnMode.Cursor = Cursors.Hand;
+            btnMode.BackColor = Color.Transparent;
             resources.ApplyResources(btnMode, "btnMode");
+            btnMode.Cursor = Cursors.Hand;
             btnMode.Name = "btnMode";
-            btnMode.UseVisualStyleBackColor = true;
+            btnMode.UseVisualStyleBackColor = false;
             btnMode.Click += btnMode_Click;
             // 
             // label4
@@ -164,11 +167,22 @@
             resources.ApplyResources(label4, "label4");
             label4.Name = "label4";
             // 
+            // btnDiscord
+            // 
+            btnDiscord.BackColor = Color.Transparent;
+            btnDiscord.BackgroundImage = Properties.Resources.Discord;
+            resources.ApplyResources(btnDiscord, "btnDiscord");
+            btnDiscord.Cursor = Cursors.Hand;
+            btnDiscord.Name = "btnDiscord";
+            btnDiscord.UseVisualStyleBackColor = false;
+            btnDiscord.Click += btnDiscord_Click;
+            // 
             // BossForm
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
+            Controls.Add(btnDiscord);
             Controls.Add(label4);
             Controls.Add(btnMode);
             Controls.Add(btnRules);
@@ -212,5 +226,6 @@
         private Button btnRules;
         private Button btnMode;
         private Label label4;
+        private Button btnDiscord;
     }
 }

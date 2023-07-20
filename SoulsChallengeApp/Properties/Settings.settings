@@ -11,6 +11,9 @@
     <Setting Name="CurrentGame" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="CurrentRunType" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="CompletedBosses" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

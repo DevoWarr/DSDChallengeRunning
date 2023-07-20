@@ -1,64 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!--
-    Microsoft ResX Schema 
-
-    Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
-    associated with the data types.
-
-    Example:
-
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing"">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-
-    There are any number of "resheader" rows that contain simple
-    name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
-    mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
-    extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
-    read any of the formats listed below.
-
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
+﻿<root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -141,10 +81,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;clbBosses.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="cbxGames.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 49</value>
+    <value>12, 50</value>
   </data>
   <data name="cbxGames.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 28</value>
@@ -162,23 +102,23 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbxGames.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
+    <value>Segoe UI, 12pt, style=Bold</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 9</value>
+    <value>10, 10</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 28</value>
+    <value>66, 28</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -196,7 +136,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="lblBosses.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -208,7 +148,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblBosses.Location" type="System.Drawing.Point, System.Drawing">
-    <value>777, 49</value>
+    <value>777, 50</value>
   </data>
   <data name="lblBosses.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 28</value>
@@ -229,7 +169,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblBosses.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="cbxRestrictions.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -241,7 +181,7 @@
     <value>None</value>
   </data>
   <data name="cbxRestrictions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 49</value>
+    <value>192, 50</value>
   </data>
   <data name="cbxRestrictions.Size" type="System.Drawing.Size, System.Drawing">
     <value>395, 25</value>
@@ -259,22 +199,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbxRestrictions.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
+    <value>Segoe UI, 12pt, style=Bold</value>
   </data>
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 9</value>
+    <value>190, 10</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 28</value>
+    <value>115, 28</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -292,7 +232,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="rbLegend.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -304,7 +244,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbLegend.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 89</value>
+    <value>500, 95</value>
   </data>
   <data name="rbLegend.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 32</value>
@@ -325,7 +265,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rbLegend.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="rbChampion.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -337,7 +277,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbChampion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 89</value>
+    <value>330, 95</value>
   </data>
   <data name="rbChampion.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 32</value>
@@ -358,7 +298,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rbChampion.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="rbCasual.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -370,7 +310,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbCasual.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 89</value>
+    <value>195, 95</value>
   </data>
   <data name="rbCasual.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 32</value>
@@ -391,7 +331,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rbCasual.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="btnSubmit.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -403,7 +343,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnSubmit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>627, 89</value>
+    <value>627, 90</value>
   </data>
   <data name="btnSubmit.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 40</value>
@@ -424,22 +364,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnSubmit.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
+    <value>Segoe UI, 12pt, style=Bold</value>
   </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>627, 9</value>
+    <value>625, 10</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 28</value>
+    <value>119, 28</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -457,7 +397,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="btnReset.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
@@ -487,7 +427,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnReset.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblCompletion.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -499,7 +439,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCompletion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>627, 49</value>
+    <value>625, 50</value>
   </data>
   <data name="lblCompletion.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 28</value>
@@ -520,7 +460,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCompletion.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="btnRules.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
@@ -529,7 +469,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnRules.Location" type="System.Drawing.Point, System.Drawing">
-    <value>869, 89</value>
+    <value>870, 90</value>
   </data>
   <data name="btnRules.Size" type="System.Drawing.Size, System.Drawing">
     <value>201, 40</value>
@@ -550,7 +490,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnRules.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
+  </data>
+  <data name="btnMode.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
   </data>
   <data name="btnMode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
@@ -559,16 +502,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>869, 49</value>
+    <value>870, 50</value>
   </data>
   <data name="btnMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 40</value>
+    <value>40, 40</value>
   </data>
   <data name="btnMode.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
-  </data>
-  <data name="btnMode.Text" xml:space="preserve">
-    <value>Dark Mode</value>
   </data>
   <data name="&gt;&gt;btnMode.Name" xml:space="preserve">
     <value>btnMode</value>
@@ -580,22 +520,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnMode.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label4.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
+    <value>Segoe UI, 12pt, style=Bold</value>
   </data>
   <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>869, 9</value>
+    <value>870, 10</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 28</value>
+    <value>66, 28</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -613,6 +553,36 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnDiscord.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="btnDiscord.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="btnDiscord.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnDiscord.Location" type="System.Drawing.Point, System.Drawing">
+    <value>916, 50</value>
+  </data>
+  <data name="btnDiscord.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 40</value>
+  </data>
+  <data name="btnDiscord.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;btnDiscord.Name" xml:space="preserve">
+    <value>btnDiscord</value>
+  </data>
+  <data name="&gt;&gt;btnDiscord.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnDiscord.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnDiscord.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
