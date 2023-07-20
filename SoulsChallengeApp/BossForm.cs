@@ -145,7 +145,6 @@ namespace SoulsChallengeApp
                 return;
             }
 
-            // Entry IDS
             string entryRadio = "entry.1804428826=";
             string entryCheck = "&entry.805188992=";
             string entryOther = "&entry.1655991278=";
@@ -154,25 +153,35 @@ namespace SoulsChallengeApp
             string submissionTemplate = File.ReadAllText(gamePath);
 
             string category = $"{entryRadio}{currentRunType}";
-
-            var restrictions = FindRunTypes();
-            string restrictionsParameters = string.Join("&", restrictions.Select((r, i) => $"{entryCheck}{r}"));
-
-            string submissionURL = submissionTemplate
-                .Replace("{Category}", category)
-                .Replace("{Restrictions}", restrictionsParameters);
-
+            string submissionURL;
+            string restrictionsParameters = string.Empty;
             string restriction = cbxRestrictions.SelectedItem?.ToString()!;
-            string otherRestriction = HttpUtility.UrlEncode(restriction);
+            string challengeRun = currentRunType == RunType.Champion ? $"{currentGame} - {(currentGame == "Sekiro" ? "Base Vit" : "Champion")}" : restriction;
 
-            submissionURL += $"{entryOther}{otherRestriction}";
+            if (currentRunType == RunType.Champion)
+            {
+                string champTypeEntry = $"{entryCheck}{(currentGame == "Sekiro" ? "Base Vit" : "Champion")}";
+                submissionURL = submissionTemplate.Replace("{Category}", category)
+                                                 .Replace("{Restrictions}", champTypeEntry);
+            }
+            else // Legend Run
+            {
+                var restrictions = FindRunTypes();
+                restrictionsParameters = string.Join("&", restrictions.Select(r => $"{entryCheck}{r}"));
 
-            DialogResult result = MessageBox.Show($"Congratulations on completing your run for {currentGame}: \n{restriction}\n" +
+                string otherRestriction = HttpUtility.UrlEncode(restriction);
+                submissionURL = submissionTemplate.Replace("{Category}", category)
+                                                 .Replace("{Restrictions}", restrictionsParameters + entryOther + otherRestriction);
+            }
+
+            DialogResult result = MessageBox.Show($"Congratulations on completing your run for {currentGame}: \n{challengeRun}\n" +
                 $"You will be redirected to the Google Submission Form.\n" +
                 "Would you like to continue?", "Submission Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes) await OpenURLAsync(submissionURL);
         }
+
+
         private async void btnRules_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Go to DSD Challenge Run Rules Document?",
@@ -265,15 +274,16 @@ namespace SoulsChallengeApp
         }
         private List<string> FindRunTypes()
         {
+            var restrictions = new List<string>();
+
             var types = new List<string>
             {
                 "NG", "CoC", "Broken Thief Sword", "Broken Straight Sword", "+0",
-                "No Roll", "Deathless", "NoHit", "NG+ 7 No Aux", "No Roll/Block/Parry", "+0 Weapons No Aux",
+                "No Roll", "Deathless", "No Hit", "NG+ 7 No Aux", "No Roll/Block/Parry", "+0 Weapons No Aux",
                 "No Deflect", "No Items", "Sword Only", "Base Att", "Hardmode"
             };
 
             string selectedRestriction = cbxRestrictions.Text;
-            var restrictions = new List<string>();
 
             if (selectedRestriction.Contains(types[0]))
             {
@@ -285,10 +295,9 @@ namespace SoulsChallengeApp
                 .Where(type => selectedRestriction.Contains(type))
                 .Select(type => HttpUtility.UrlEncode(type))
                 .ToList();
-
             }
 
-            if (restrictions.Count == 0)
+            if (restrictions.Count == 0 || restrictions.Contains(HttpUtility.UrlEncode(types[3]))) // None or DS1 BSS
                 restrictions.Add("Other");
 
             return restrictions;
