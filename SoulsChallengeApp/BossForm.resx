@@ -81,7 +81,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;clbBosses.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="cbxGames.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 50</value>
@@ -102,7 +102,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbxGames.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -136,7 +136,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="lblBosses.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -148,7 +148,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblBosses.Location" type="System.Drawing.Point, System.Drawing">
-    <value>777, 50</value>
+    <value>788, 50</value>
   </data>
   <data name="lblBosses.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 28</value>
@@ -169,7 +169,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblBosses.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="cbxRestrictions.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -181,7 +181,7 @@
     <value>None</value>
   </data>
   <data name="cbxRestrictions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 50</value>
+    <value>204, 50</value>
   </data>
   <data name="cbxRestrictions.Size" type="System.Drawing.Size, System.Drawing">
     <value>395, 25</value>
@@ -199,7 +199,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbxRestrictions.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -211,7 +211,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 10</value>
+    <value>200, 10</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 28</value>
@@ -232,7 +232,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="rbLegend.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -244,7 +244,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbLegend.Location" type="System.Drawing.Point, System.Drawing">
-    <value>500, 95</value>
+    <value>512, 95</value>
   </data>
   <data name="rbLegend.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 32</value>
@@ -265,7 +265,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rbLegend.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="rbChampion.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -277,7 +277,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbChampion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>330, 95</value>
+    <value>342, 95</value>
   </data>
   <data name="rbChampion.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 32</value>
@@ -298,7 +298,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rbChampion.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="rbCasual.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -310,7 +310,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbCasual.Location" type="System.Drawing.Point, System.Drawing">
-    <value>195, 95</value>
+    <value>207, 95</value>
   </data>
   <data name="rbCasual.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 32</value>
@@ -331,7 +331,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rbCasual.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="btnSubmit.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -343,7 +343,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnSubmit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>627, 90</value>
+    <value>638, 90</value>
   </data>
   <data name="btnSubmit.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 40</value>
@@ -364,7 +364,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnSubmit.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -376,7 +376,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>625, 10</value>
+    <value>636, 10</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 28</value>
@@ -397,7 +397,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="btnReset.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
@@ -427,7 +427,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnReset.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="lblCompletion.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -439,7 +439,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCompletion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>625, 50</value>
+    <value>636, 50</value>
   </data>
   <data name="lblCompletion.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 28</value>
@@ -460,7 +460,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCompletion.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="btnRules.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
@@ -469,10 +469,10 @@
     <value>NoControl</value>
   </data>
   <data name="btnRules.Location" type="System.Drawing.Point, System.Drawing">
-    <value>870, 90</value>
+    <value>892, 90</value>
   </data>
   <data name="btnRules.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 40</value>
+    <value>178, 40</value>
   </data>
   <data name="btnRules.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -490,7 +490,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnRules.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="btnMode.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
@@ -502,7 +502,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>870, 50</value>
+    <value>892, 50</value>
   </data>
   <data name="btnMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 40</value>
@@ -520,7 +520,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnMode.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -532,7 +532,7 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>870, 10</value>
+    <value>887, 10</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 28</value>
@@ -553,7 +553,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="btnDiscord.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
@@ -565,7 +565,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnDiscord.Location" type="System.Drawing.Point, System.Drawing">
-    <value>916, 50</value>
+    <value>938, 50</value>
   </data>
   <data name="btnDiscord.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 40</value>
@@ -583,6 +583,66 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnDiscord.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnGithub.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="btnGithub.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="btnGithub.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnGithub.Location" type="System.Drawing.Point, System.Drawing">
+    <value>984, 50</value>
+  </data>
+  <data name="btnGithub.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 40</value>
+  </data>
+  <data name="btnGithub.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;btnGithub.Name" xml:space="preserve">
+    <value>btnGithub</value>
+  </data>
+  <data name="&gt;&gt;btnGithub.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnGithub.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnGithub.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnInfo.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="btnInfo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="btnInfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1030, 50</value>
+  </data>
+  <data name="btnInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 40</value>
+  </data>
+  <data name="btnInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;btnInfo.Name" xml:space="preserve">
+    <value>btnInfo</value>
+  </data>
+  <data name="&gt;&gt;btnInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnInfo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnInfo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

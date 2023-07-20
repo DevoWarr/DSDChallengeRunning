@@ -3,6 +3,7 @@ using Octokit;
 using Semver;
 using SoulsChallengeApp.Models;
 using System.Diagnostics;
+using System.Text;
 using System.Web;
 
 namespace SoulsChallengeApp
@@ -12,6 +13,7 @@ namespace SoulsChallengeApp
         // Constants
         private const string RulesURL = @"https://docs.google.com/document/d/1Hffx3O7SavIRUErIeLXMvRQ5yH6Lx1Xs9ZFuPqglvr4/edit";
         private const string DiscordURL = @"https://discord.gg/invite/darksouls3";
+        private const string GitHubURL = @"https://github.com/DevoWarr/DSDChallengeRunning";
 
         // Variables
         private static string basePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Games");
@@ -150,13 +152,15 @@ namespace SoulsChallengeApp
             // Checks
             if (currentRunType == null)
             {
-                MessageBox.Show("Please select a Run Type", "Run Type Required");
+                MessageBox.Show("Please select a Run Type", "Run Type Required",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
             if (currentRunType == RunType.Legend && cbxRestrictions.SelectedItem == null)
             {
-                MessageBox.Show("Please select a restriction for your Legend Run!", "Restriction Required");
+                MessageBox.Show("Please select a restriction for your Legend Run!", "Restriction Required",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -207,6 +211,30 @@ namespace SoulsChallengeApp
             isDarkMode = !isDarkMode;
             Properties.Settings.Default.UserSelectedMode = isDarkMode;
             SetMode(isDarkMode);
+        }
+        private void btnInfo_Click(object sender, EventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Easy tool for tracking bosses in FromSoftware games.");
+            sb.AppendLine("Submit your challenge runs to the DSD Server to obtain roles!");
+            sb.AppendLine("Discord: @devowarr or DSD Discord Server");
+
+            MessageBox.Show(sb.ToString(), "Information");
+        }
+        private async void btnDiscord_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Would you like to join the DSD Discord Server?", "DSD Discord",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes) await OpenURLAsync(DiscordURL);
+        }
+
+        private async void btnGithub_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("View GitHub repository?", "DSDChallengeRunning Repository",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes) await OpenURLAsync(GitHubURL);
         }
 
         // UI
@@ -373,10 +401,10 @@ namespace SoulsChallengeApp
         }
         private async Task CheckGitHubUpdates()
         {
-            GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue("SoulsChallenge"));
+            GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue("DSDChallengeRunning"));
             try
             {
-                Release release = await gitHubClient.Repository.Release.GetLatest("DevoWarr", "SoulsChallenge");
+                Release release = await gitHubClient.Repository.Release.GetLatest("DevoWarr", "DSDChallengeRunning");
                 var latestVersion = SemVersion.Parse(release.TagName);
 
                 if (latestVersion > System.Windows.Forms.Application.ProductVersion)
@@ -403,12 +431,9 @@ namespace SoulsChallengeApp
         private async Task LoadGameDataAsync(string gameName, string basePath) =>
             await Task.Run(() => gameData.LoadGameData(gameName, basePath));
 
-        private async void btnDiscord_Click(object sender, EventArgs e)
+        private void label4_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Would you like to join the DSD Discord Server?", "DSD Discord",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (result == DialogResult.Yes) await OpenURLAsync(DiscordURL);
         }
     }
 }

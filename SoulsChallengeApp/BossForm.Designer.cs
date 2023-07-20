@@ -46,6 +46,8 @@
             btnMode = new Button();
             label4 = new Label();
             btnDiscord = new Button();
+            btnGithub = new Button();
+            btnInfo = new Button();
             SuspendLayout();
             // 
             // clbBosses
@@ -166,6 +168,7 @@
             // 
             resources.ApplyResources(label4, "label4");
             label4.Name = "label4";
+            label4.Click += label4_Click;
             // 
             // btnDiscord
             // 
@@ -177,11 +180,33 @@
             btnDiscord.UseVisualStyleBackColor = false;
             btnDiscord.Click += btnDiscord_Click;
             // 
+            // btnGithub
+            // 
+            btnGithub.BackColor = Color.Transparent;
+            btnGithub.BackgroundImage = Properties.Resources.GitHub;
+            resources.ApplyResources(btnGithub, "btnGithub");
+            btnGithub.Cursor = Cursors.Hand;
+            btnGithub.Name = "btnGithub";
+            btnGithub.UseVisualStyleBackColor = false;
+            btnGithub.Click += btnGithub_Click;
+            // 
+            // btnInfo
+            // 
+            btnInfo.BackColor = Color.Transparent;
+            btnInfo.BackgroundImage = Properties.Resources.Info;
+            resources.ApplyResources(btnInfo, "btnInfo");
+            btnInfo.Cursor = Cursors.Hand;
+            btnInfo.Name = "btnInfo";
+            btnInfo.UseVisualStyleBackColor = false;
+            btnInfo.Click += btnInfo_Click;
+            // 
             // BossForm
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
+            Controls.Add(btnInfo);
+            Controls.Add(btnGithub);
             Controls.Add(btnDiscord);
             Controls.Add(label4);
             Controls.Add(btnMode);
@@ -227,5 +252,7 @@
         private Button btnMode;
         private Label label4;
         private Button btnDiscord;
+        private Button btnGithub;
+        private Button btnInfo;
     }
 }
