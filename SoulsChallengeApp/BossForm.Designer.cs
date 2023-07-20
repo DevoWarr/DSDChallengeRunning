@@ -44,7 +44,6 @@
             lblCompletion = new Label();
             btnRules = new Button();
             btnMode = new Button();
-            label4 = new Label();
             btnDiscord = new Button();
             btnGithub = new Button();
             btnInfo = new Button();
@@ -202,7 +201,6 @@
             Controls.Add(btnInfo);
             Controls.Add(btnGithub);
             Controls.Add(btnDiscord);
-            Controls.Add(label4);
             Controls.Add(btnMode);
             Controls.Add(btnRules);
             Controls.Add(lblCompletion);
@@ -244,7 +242,6 @@
         private Label lblCompletion;
         private Button btnRules;
         private Button btnMode;
-        private Label label4;
         private Button btnDiscord;
         private Button btnGithub;
         private Button btnInfo;

@@ -372,7 +372,7 @@ namespace SoulsChallengeApp
 
             if (selectedRestriction == "SL1 NG+ Broken Weapons No Auxiliary (Bleed/Toxic/Poison/Frost)")
                 restrictions.Remove("Max Ng");
-                
+
             return restrictions;
         }
         private void CheckCompletedRun()
