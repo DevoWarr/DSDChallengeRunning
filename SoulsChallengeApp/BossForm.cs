@@ -370,6 +370,14 @@ namespace SoulsChallengeApp
 
             if (selectedRestriction.Contains("CoC") && restrictions.Count == 2) restrictions.Add("Other");
 
+            if (currentGame == "Sekiro")
+            {
+                restrictions.Add("Base Vit");
+
+                if (restrictions.Count == 2)
+                    restrictions.Add("Other");
+            }
+
             if (selectedRestriction == "SL1 NG+ Broken Weapons No Auxiliary (Bleed/Toxic/Poison/Frost)")
                 restrictions.Remove("Max Ng");
 
