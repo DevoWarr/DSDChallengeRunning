@@ -18,6 +18,7 @@ check out
 If you don't want to challenge run, you can choose the option 'Casual'. This way, you can keep track of defeated bosses without having to think about Challenge Running!
 
 Please report any bugs to me if you find any!
+
 If you have any questions, feel free to contact me or ask help in the Discord Server!
 
 Made by DevoWarr
