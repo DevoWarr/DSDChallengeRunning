@@ -228,7 +228,6 @@ namespace SoulsChallengeApp
 
             if (result == DialogResult.Yes) await OpenURLAsync(DiscordURL);
         }
-
         private async void btnGithub_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("View GitHub repository?", "DSDChallengeRunning Repository",
@@ -356,20 +355,24 @@ namespace SoulsChallengeApp
             string selectedRestriction = cbxRestrictions.Text;
 
             if (selectedRestriction.Contains(types[0]))
-            {
                 restrictions.Add("Max Ng");
-            }
-            else
-            {
-                restrictions = types
+
+            if (selectedRestriction.Contains(types[1]))
+                restrictions.Add("Company of Champion");
+
+            restrictions.AddRange(types
                 .Where(type => selectedRestriction.Contains(type))
                 .Select(type => HttpUtility.UrlEncode(type))
-                .ToList();
-            }
+                .ToList());
 
             if (restrictions.Count == 0 || restrictions.Contains(HttpUtility.UrlEncode(types[3]))) // None or DS1 BSS
                 restrictions.Add("Other");
 
+            if (selectedRestriction.Contains("CoC") && restrictions.Count == 2) restrictions.Add("Other");
+
+            if (selectedRestriction == "SL1 NG+ Broken Weapons No Auxiliary (Bleed/Toxic/Poison/Frost)")
+                restrictions.Remove("Max Ng");
+                
             return restrictions;
         }
         private void CheckCompletedRun()
@@ -430,10 +433,5 @@ namespace SoulsChallengeApp
         }
         private async Task LoadGameDataAsync(string gameName, string basePath) =>
             await Task.Run(() => gameData.LoadGameData(gameName, basePath));
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

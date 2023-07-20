@@ -62,7 +62,7 @@
     <value>Segoe UI, 12pt</value>
   </data>
   <data name="clbBosses.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 149</value>
+    <value>22, 149</value>
   </data>
   <data name="clbBosses.Size" type="System.Drawing.Size, System.Drawing">
     <value>1058, 642</value>
@@ -84,7 +84,7 @@
     <value>18</value>
   </data>
   <data name="cbxGames.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 50</value>
+    <value>22, 50</value>
   </data>
   <data name="cbxGames.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 28</value>
@@ -115,7 +115,7 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
+    <value>20, 10</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 28</value>
@@ -148,7 +148,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblBosses.Location" type="System.Drawing.Point, System.Drawing">
-    <value>788, 50</value>
+    <value>798, 50</value>
   </data>
   <data name="lblBosses.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 28</value>
@@ -181,7 +181,7 @@
     <value>None</value>
   </data>
   <data name="cbxRestrictions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 50</value>
+    <value>214, 50</value>
   </data>
   <data name="cbxRestrictions.Size" type="System.Drawing.Size, System.Drawing">
     <value>395, 25</value>
@@ -211,7 +211,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 10</value>
+    <value>210, 10</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 28</value>
@@ -244,7 +244,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbLegend.Location" type="System.Drawing.Point, System.Drawing">
-    <value>512, 95</value>
+    <value>522, 95</value>
   </data>
   <data name="rbLegend.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 32</value>
@@ -277,7 +277,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbChampion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 95</value>
+    <value>352, 95</value>
   </data>
   <data name="rbChampion.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 32</value>
@@ -310,7 +310,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbCasual.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 95</value>
+    <value>217, 95</value>
   </data>
   <data name="rbCasual.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 32</value>
@@ -343,7 +343,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnSubmit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>638, 90</value>
+    <value>648, 90</value>
   </data>
   <data name="btnSubmit.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 40</value>
@@ -376,7 +376,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>636, 10</value>
+    <value>646, 10</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 28</value>
@@ -406,7 +406,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnReset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 89</value>
+    <value>22, 89</value>
   </data>
   <data name="btnReset.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 40</value>
@@ -439,7 +439,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCompletion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>636, 50</value>
+    <value>646, 50</value>
   </data>
   <data name="lblCompletion.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 28</value>
@@ -469,7 +469,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnRules.Location" type="System.Drawing.Point, System.Drawing">
-    <value>892, 90</value>
+    <value>902, 90</value>
   </data>
   <data name="btnRules.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 40</value>
@@ -502,7 +502,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>892, 50</value>
+    <value>902, 50</value>
   </data>
   <data name="btnMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 40</value>
@@ -532,7 +532,7 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>887, 10</value>
+    <value>897, 10</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 28</value>
@@ -565,7 +565,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnDiscord.Location" type="System.Drawing.Point, System.Drawing">
-    <value>938, 50</value>
+    <value>948, 50</value>
   </data>
   <data name="btnDiscord.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 40</value>
@@ -595,7 +595,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnGithub.Location" type="System.Drawing.Point, System.Drawing">
-    <value>984, 50</value>
+    <value>994, 50</value>
   </data>
   <data name="btnGithub.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 40</value>
@@ -625,7 +625,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1030, 50</value>
+    <value>1040, 50</value>
   </data>
   <data name="btnInfo.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 40</value>
@@ -652,7 +652,7 @@
     <value>8, 20</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1082, 803</value>
+    <value>1107, 803</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

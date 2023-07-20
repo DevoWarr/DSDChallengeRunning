@@ -164,12 +164,6 @@
             btnMode.UseVisualStyleBackColor = false;
             btnMode.Click += btnMode_Click;
             // 
-            // label4
-            // 
-            resources.ApplyResources(label4, "label4");
-            label4.Name = "label4";
-            label4.Click += label4_Click;
-            // 
             // btnDiscord
             // 
             btnDiscord.BackColor = Color.Transparent;
