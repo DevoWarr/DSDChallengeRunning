@@ -8,6 +8,9 @@
     <Setting Name="UserSelectedMode" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="CurrentGame" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="CompletedBosses" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

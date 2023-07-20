@@ -15,7 +15,7 @@ namespace SoulsChallengeApp
         // Variables
         private static string basePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Games");
         private GameData gameData;
-        private string currentGame = string.Empty;
+        private string currentGame = Properties.Settings.Default.CurrentGame;
         public List<Boss> bossList = new List<Boss>();
         private RunType? currentRunType;
         private int bossCount;
@@ -69,7 +69,11 @@ namespace SoulsChallengeApp
             };
 
             cbxGames.Items.AddRange(games);
-            cbxGames.SelectedIndex = 0;
+
+            if (string.IsNullOrEmpty(currentGame))
+                cbxGames.SelectedIndex = 0;
+            else
+                cbxGames.SelectedItem = currentGame;
         }
 
         // Events
@@ -248,6 +252,7 @@ namespace SoulsChallengeApp
         private void BossForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             var gameDataJson = gameData.SerializeGameDataToJson();
+            Properties.Settings.Default.CurrentGame = currentGame;
             Properties.Settings.Default.CompletedBosses = gameDataJson;
         }
 
@@ -347,7 +352,7 @@ namespace SoulsChallengeApp
             }
         }
         private async Task LoadGameDataAsync(string gameName, string basePath) =>
-    await Task.Run(() => gameData.LoadGameData(gameName, basePath));
+            await Task.Run(() => gameData.LoadGameData(gameName, basePath));
 
     }
 }
