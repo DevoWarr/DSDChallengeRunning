@@ -1,0 +1,688 @@
+[
+    {
+        "GameName": "Demon's Souls",
+        "Bosses": [
+            {
+                "Name": "Vanguard"
+            },
+            {
+                "Name": "Phalanx"
+            },
+            {
+                "Name": "Tower Knight"
+            },
+            {
+                "Name": "Armor Spider"
+            },
+            {
+                "Name": "Fool's Idol"
+            },
+            {
+                "Name": "Adjudicator"
+            },
+            {
+                "Name": "Old Hero"
+            },
+            {
+                "Name": "Maneaters"
+            },
+            {
+                "Name": "Flamelurker"
+            },
+            {
+                "Name": "Dragon God"
+            },
+            {
+                "Name": "Storm King"
+            },
+            {
+                "Name": "Leechmonger"
+            },
+            {
+                "Name": "Dirty Colossus"
+            },
+            {
+                "Name": "Old Monk"
+            },
+            {
+                "Name": "Penetrator"
+            },
+            {
+                "Name": "Maiden Astraea"
+            },
+            {
+                "Name": "Old King Allant"
+            },
+            {
+                "Name": "King Allant"
+            }
+        ],
+        "Restrictions": [
+            {
+                "Name": "SL1 NG+5"
+            },
+            {
+                "Name": "SL1 No Roll/Block/Parry"
+            },
+            {
+                "Name": "SL1 +0 Weapons No Toxic/Poison"
+            },
+            {
+                "Name": "SL1 Fist only"
+            },
+            {
+                "Name": "SL1 No Hit"
+            }
+        ],
+        "Submission": "https://docs.google.com/forms/d/e/1FAIpQLSdIi4mgCRMJwywlmAIS_n7upT_bH5afufzLVhPnlSvl_xGfCA/viewform?{Category}{Restrictions}"
+    },
+    {
+        "GameName": "Dark Souls I",
+        "Bosses": [
+            {
+                "Name": "Asylum Demon"
+            },
+            {
+                "Name": "Taurus Demon"
+            },
+            {
+                "Name": "Bell Gargoyles"
+            },
+            {
+                "Name": "Capra Demon"
+            },
+            {
+                "Name": "Gaping Dragon"
+            },
+            {
+                "Name": "Chaos Witch Quelaag"
+            },
+            {
+                "Name": "Moonlight Butterfly"
+            },
+            {
+                "Name": "Iron Golem"
+            },
+            {
+                "Name": "Ornstein and Smough"
+            },
+            {
+                "Name": "Crossbreed Priscilla"
+            },
+            {
+                "Name": "Dark Sun Gwyndolin"
+            },
+            {
+                "Name": "Great Grey Wolf Sif"
+            },
+            {
+                "Name": "Seath the Scaleless"
+            },
+            {
+                "Name": "Ceaseless Discharge"
+            },
+            {
+                "Name": "Demon Firesage"
+            },
+            {
+                "Name": "Centipede Demon"
+            },
+            {
+                "Name": "Bed of Chaos"
+            },
+            {
+                "Name": "Stray Demon"
+            },
+            {
+                "Name": "Pinwheel"
+            },
+            {
+                "Name": "Gravelord Nito"
+            },
+            {
+                "Name": "Four Kings"
+            },
+            {
+                "Name": "Gwyn, Lord of Cinder"
+            },
+            {
+                "Name": "Sanctuary Guardian"
+            },
+            {
+                "Name": "Artorias the Abysswalker"
+            },
+            {
+                "Name": "Manus, Father of the Abyss"
+            },
+            {
+                "Name": "Black Dragon Kalameet"
+            }
+        ],
+        "Restrictions": [
+            {
+                "Name": "SL1 NG+6"
+            },
+            {
+                "Name": "SL1 No Roll/Block/Parry"
+            },
+            {
+                "Name": "SL1 +0 Weapons/+0 Armor No Infusions/Toxic/Poison"
+            },
+            {
+                "Name": "SL1 Broken Straight Sword only"
+            },
+            {
+                "Name": "SL1 No Hit Any%"
+            },
+            {
+                "Name": "SL1 Deathless All bosses"
+            }
+        ],
+        "Submission": "https://docs.google.com/forms/d/e/1FAIpQLSdsUW9iaaz-8FovqiBb6jJpQt_BvlCIf8suHcRucBivnoJdnw/viewform?{Category}{Restrictions}"
+    },
+    {
+        "GameName": "Dark Souls II",
+        "Bosses": [
+            {
+                "Name": "The Last Giant"
+            },
+            {
+                "Name": "The Pursuer"
+            },
+            {
+                "Name": "Dragonrider"
+            },
+            {
+                "Name": "Old Dragonslayer"
+            },
+            {
+                "Name": "Flexile Sentry"
+            },
+            {
+                "Name": "Ruin Sentinels"
+            },
+            {
+                "Name": "Lost Sinner"
+            },
+            {
+                "Name": "Belfry Gargoyles"
+            },
+            {
+                "Name": "Skeleton Lords"
+            },
+            {
+                "Name": "Executioner's Chariot"
+            },
+            {
+                "Name": "Covetous Demon"
+            },
+            {
+                "Name": "Mytha, the Baneful Queen"
+            },
+            {
+                "Name": "Smelter Demon (Red)"
+            },
+            {
+                "Name": "Old Iron King"
+            },
+            {
+                "Name": "Scorpioness Najka"
+            },
+            {
+                "Name": "Royal Rat Authority"
+            },
+            {
+                "Name": "Prowling Magus & Congregation"
+            },
+            {
+                "Name": "The Duke's Dear Freja"
+            },
+            {
+                "Name": "Royal Rat Vanguard"
+            },
+            {
+                "Name": "The Rotten"
+            },
+            {
+                "Name": "Twin Dragonriders"
+            },
+            {
+                "Name": "Looking Glass Knight"
+            },
+            {
+                "Name": "Demon of Song"
+            },
+            {
+                "Name": "Velstadt, the Royal Aegis"
+            },
+            {
+                "Name": "Vendrick"
+            },
+            {
+                "Name": "Guardian Dragon"
+            },
+            {
+                "Name": "Ancient Dragon"
+            },
+            {
+                "Name": "Giant Lord"
+            },
+            {
+                "Name": "Throne Defender & Throne Watcher"
+            },
+            {
+                "Name": "Nashandra"
+            },
+            {
+                "Name": "Aldia, Scholar of the First Sin"
+            },
+            {
+                "Name": "Darklurker"
+            },
+            {
+                "Name": "Elana, Squalid Queen"
+            },
+            {
+                "Name": "Sinh, the Slumbering Dragon"
+            },
+            {
+                "Name": "Afflicted Graverobber, Ancient Soldier Varg & Cerah the Old Explorer"
+            },
+            {
+                "Name": "Fume Knight"
+            },
+            {
+                "Name": "Sir Alonne"
+            },
+            {
+                "Name": "Smelter Demon (Blue)"
+            },
+            {
+                "Name": "Lud & Zallen, the King's Pets"
+            },
+            {
+                "Name": "Aava, The King's Pet"
+            },
+            {
+                "Name": "Burnt Ivory King"
+            }
+        ],
+        "Restrictions": [
+            {
+                "Name": "SL1 CoC NG+7"
+            },
+            {
+                "Name": "SL1 CoC +0 Weapons/+0 Armor No Infusions/Toxic/Poison"
+            },
+            {
+                "Name": "SL1 CoC Broken Ladle only"
+            },
+            {
+                "Name": "SL1 CoC Broken Thief Sword only"
+            },
+            {
+                "Name": "SL1 CoC Broken Straight Sword only​"
+            },
+            {
+                "Name": "SL1 CoC No Roll/Block/Parry"
+            },
+            {
+                "Name": "SL1 & CoC Fist only"
+            },
+            {
+                "Name": "SL1 No Hit Any%"
+            },
+            {
+                "Name": "SL1 Deathless All bosses"
+            }
+        ],
+        "Submission": "https://docs.google.com/forms/d/e/1FAIpQLScZYkwijCA4-mZdQs0S4iP6Q92Cy9PhpLwroIjI4lNpB__Vsw/viewform?{Category}{Restrictions}"
+    },
+    {
+        "GameName": "Bloodborne",
+        "Bosses": [
+            {
+                "Name": "Cleric Beast"
+            },
+            {
+                "Name": "Father Gascoigne"
+            },
+            {
+                "Name": "Blood Starved Beast"
+            },
+            {
+                "Name": "Vicar Amelia"
+            },
+            {
+                "Name": "Witch of Hemwick"
+            },
+            {
+                "Name": "Shadow of Yharnam"
+            },
+            {
+                "Name": "Rom, the Vacuous Spider"
+            },
+            {
+                "Name": "Darkbeast Paarl"
+            },
+            {
+                "Name": "One Reborn"
+            },
+            {
+                "Name": "Martyr Logarius"
+            },
+            {
+                "Name": "Amygdala"
+            },
+            {
+                "Name": "Celestial Emissary"
+            },
+            {
+                "Name": "Micolash, Host of the Nightmare"
+            },
+            {
+                "Name": "Ebrietas, Daughter of the Cosmos"
+            },
+            {
+                "Name": "Mergo's Wet Nurse"
+            },
+            {
+                "Name": "Gehrman, the First Hunter"
+            },
+            {
+                "Name": "Moon Presence"
+            },
+            {
+                "Name": "Ludwig the Accursed / Holy Blade"
+            },
+            {
+                "Name": "Laurence, the First Vicar"
+            },
+            {
+                "Name": "Living Failures"
+            },
+            {
+                "Name": "Lady Maria of the Astral Clocktower"
+            },
+            {
+                "Name": "Orphan of Kos"
+            }
+        ],
+        "Restrictions": [
+            {
+                "Name": "BL4 NG+6"
+            },
+            {
+                "Name": "BL4 +0 Weapons"
+            },
+            {
+                "Name": "BL4 Hunter's Torch only"
+            },
+            {
+                "Name": "BL4 No Roll/Quickstep"
+            },
+            {
+                "Name": "BL4 No Hit Any%"
+            },
+            {
+                "Name": "BL4 Deathless All bosses"
+            }
+        ],
+        "Submission": "https://docs.google.com/forms/d/e/1FAIpQLSdEa8DNEPj1p9IZ49Xwo0tvMCmgwqnVQz2rKyZhlk6EQRi6iw/viewform?{Category}{Restrictions}"
+    },
+    {
+        "GameName": "Dark Souls III",
+        "Bosses": [
+            {
+                "Name": "Ludex Gundyr"
+            },
+            {
+                "Name": "Vordt of the Boreal Valley"
+            },
+            {
+                "Name": "Curse-Rotten Greatwood"
+            },
+            {
+                "Name": "Crystal Sage"
+            },
+            {
+                "Name": "Deacons of the Deep"
+            },
+            {
+                "Name": "Abyss Watchers"
+            },
+            {
+                "Name": "High Lord Wolnir"
+            },
+            {
+                "Name": "Old Demon King"
+            },
+            {
+                "Name": "Pontiff Sulyvahn"
+            },
+            {
+                "Name": "Yhorm, the Giant"
+            },
+            {
+                "Name": "Aldrich, Devourer of Gods"
+            },
+            {
+                "Name": "Dancer of the Boreal Valley"
+            },
+            {
+                "Name": "Dragonslayer Armour"
+            },
+            {
+                "Name": "Oceiros, the Consumed King"
+            },
+            {
+                "Name": "Champion Gundyr"
+            },
+            {
+                "Name": "Lothric, Younger Prince"
+            },
+            {
+                "Name": "Ancient Wyvern"
+            },
+            {
+                "Name": "Nameless King"
+            },
+            {
+                "Name": "Soul of Cinder"
+            },
+            {
+                "Name": "Champion's Gravetender & Gravetender Greatwolf"
+            },
+            {
+                "Name": "Sister Friede"
+            },
+            {
+                "Name": "Demon in Pain & Demon from Below / Demon Prince"
+            },
+            {
+                "Name": "Halflight, Spear of the Church"
+            },
+            {
+                "Name": "Darkeater Midir"
+            },
+            {
+                "Name": "Slave Knight Gael"
+            }
+        ],
+        "Restrictions": [
+            {
+                "Name": "SL1 NG+7 No Auxiliary (Bleed/Toxic/Poison/Frost)"
+            },
+            {
+                "Name": "SL1 No Roll/Block/Parry"
+            },
+            {
+                "Name": "SL1 +0 Weapons No Infusions/No Auxiliary (Bleed/Toxic/Poison/Frost)"
+            },
+            {
+                "Name": "SL1 NG+ Broken Weapons No Auxiliary (Bleed/Toxic/Poison/Frost)"
+            },
+            {
+                "Name": "SL1 No Hit Any%"
+            },
+            {
+                "Name": "SL1 Deathless All bosses"
+            }
+        ],
+        "Submission": "https://docs.google.com/forms/d/e/1FAIpQLSeNyBRJvgohSUZlOqlDIysACughjpr0gtbv3bNDOYylh8BWOQ/viewform?{Category}{Restrictions}"
+    },
+    {
+        "GameName": "Sekiro",
+        "Bosses": [
+            {
+                "Name": "Gyoubu Oniwa"
+            },
+            {
+                "Name": "Genichiro Ashina"
+            },
+            {
+                "Name": "Lady Butterfly"
+            },
+            {
+                "Name": "Folding Screen Monkeys"
+            },
+            {
+                "Name": "Guardian Ape"
+            },
+            {
+                "Name": "Corrupted Monk"
+            },
+            {
+                "Name": "Great Shinobi Owl"
+            },
+            {
+                "Name": "Headless Ape"
+            },
+            {
+                "Name": "True Corrupted Monk"
+            },
+            {
+                "Name": "Divine Dragon"
+            },
+            {
+                "Name": "Owl (Father)"
+            },
+            {
+                "Name": "Demon of Hatred"
+            },
+            {
+                "Name": "Isshin, the Sword Saint"
+            }
+        ],
+        "Restrictions": [
+            {
+                "Name": "​​No Block / No Deflect"
+            },
+            {
+                "Name": "NG+7 (Max 14 AP)"
+            },
+            {
+                "Name": "No prosthetic tools"
+            },
+            {
+                "Name": "Attack Power 1 (Base Att)"
+            },
+            {
+                "Name": "AP1 No Hit Immortal Severance"
+            },
+            {
+                "Name": "Deathless All bosses"
+            }
+        ],
+        "Submission": "https://docs.google.com/forms/d/e/1FAIpQLSc368wtKmjaXE9GHMiHG9GWOe5su8GMq_f6of_vPp5_4ga2Kw/viewform?{Category}{Restrictions}"
+    },
+    {
+        "GameName": "Elden Ring",
+        "Bosses": [
+            {
+                "Name": "Margit, the Fell Omen"
+            },
+            {
+                "Name": "Godrick the Grafted"
+            },
+            {
+                "Name": "Red Wolf of Radagon"
+            },
+            {
+                "Name": "Rennala, Queen of the Full Moon"
+            },
+            {
+                "Name": "Starscourge Radahn"
+            },
+            {
+                "Name": "Regal Ancestor Spirit"
+            },
+            {
+                "Name": "Astel, Naturalborn of the Void"
+            },
+            {
+                "Name": "Godskin Noble"
+            },
+            {
+                "Name": "Rykard, Lord of Blasphemy"
+            },
+            {
+                "Name": "Draconic Tree Sentinel"
+            },
+            {
+                "Name": "Godfrey, First Elden Lord"
+            },
+            {
+                "Name": "Morgott the Omen King"
+            },
+            {
+                "Name": "Fire Giant"
+            },
+            {
+                "Name": "Mohg, Lord of Blood"
+            },
+            {
+                "Name": "Godskin Duo"
+            },
+            {
+                "Name": "Maliketh, the Black Blade"
+            },
+            {
+                "Name": "Sir Gideon Ofnir, the All-Knowing"
+            },
+            {
+                "Name": "Hoarah Loux, Warrior"
+            },
+            {
+                "Name": "Radagon of the Golden Order & Elden Beast"
+            },
+            {
+                "Name": "Commander Niall"
+            },
+            {
+                "Name": "Loretta, Knight of the Haligtree"
+            },
+            {
+                "Name": "Malenia, Blade of Miquella"
+            },
+            {
+                "Name": "Lichdragon Fortissax"
+            },
+            {
+                "Name": "Dragonlord Placidusax"
+            }
+        ],
+        "Restrictions": [
+            {
+                "Name": "RL1 NG+ 7 No Auxiliary (Poison/Rot/Bleed/Frost/Sleep/Madness/Blight)"
+            },
+            {
+                "Name": "RL1 No Roll/Block/Parry"
+            },
+            {
+                "Name": "RL1 +0 Weapons No Auxiliary (Poison/Rot/Bleed/Frost/Sleep/Madness/Blight)"
+            }
+        ],
+        "Submission": "https://docs.google.com/forms/d/e/1FAIpQLSe2Vo-WZ8fl4nG5y2zyti_bUQ4aTLbhc2SdtcTk0fkPJTFjGA/viewform?{Category}{Restrictions}"
+    }
+]

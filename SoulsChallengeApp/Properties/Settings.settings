@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SoulsChallengeApp.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DSD_App.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="UpgradeRequired" Type="System.Boolean" Scope="User">
@@ -13,6 +13,9 @@
     </Setting>
     <Setting Name="CurrentRunType" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CurrentRestriction" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="CompletedBosses" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

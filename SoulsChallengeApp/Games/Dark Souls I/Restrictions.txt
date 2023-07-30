@@ -1,6 +1,0 @@
-SL1 NG+6
-SL1 No Roll/Block/Parry
-SL1 +0 Weapons/+0 Armor No Infusions/Toxic/Poison
-SL1 Broken Straight Sword only
-SL1 No Hit Any%
-SL1 Deathless All bosses

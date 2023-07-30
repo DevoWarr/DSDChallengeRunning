@@ -22,7 +22,7 @@ namespace DSD_App.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace DSD_App.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DSD_App.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace DSD_App.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace DSD_App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap DarkMode {
+        public static System.Drawing.Bitmap DarkMode {
             get {
                 object obj = ResourceManager.GetObject("DarkMode", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace DSD_App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Discord {
+        public static System.Drawing.Bitmap Discord {
             get {
                 object obj = ResourceManager.GetObject("Discord", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +83,7 @@ namespace DSD_App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon DSD_Icon {
+        public static System.Drawing.Icon DSD_Icon {
             get {
                 object obj = ResourceManager.GetObject("DSD_Icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
@@ -91,9 +91,41 @@ namespace DSD_App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [
+        ///    {
+        ///        &quot;GameName&quot;: &quot;Demon&apos;s Souls&quot;,
+        ///        &quot;Bosses&quot;: [
+        ///            {
+        ///                &quot;Name&quot;: &quot;Vanguard&quot;
+        ///            },
+        ///            {
+        ///                &quot;Name&quot;: &quot;Phalanx&quot;
+        ///            },
+        ///            {
+        ///                &quot;Name&quot;: &quot;Tower Knight&quot;
+        ///            },
+        ///            {
+        ///                &quot;Name&quot;: &quot;Armor Spider&quot;
+        ///            },
+        ///            {
+        ///                &quot;Name&quot;: &quot;Fool&apos;s Idol&quot;
+        ///            },
+        ///            {
+        ///                &quot;Name&quot;: &quot;Adjudicator&quot;
+        ///            },
+        ///            {
+        ///              [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string GameData {
+            get {
+                return ResourceManager.GetString("GameData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap GitHub {
+        public static System.Drawing.Bitmap GitHub {
             get {
                 object obj = ResourceManager.GetObject("GitHub", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +135,7 @@ namespace DSD_App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Info {
+        public static System.Drawing.Bitmap Info {
             get {
                 object obj = ResourceManager.GetObject("Info", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +145,7 @@ namespace DSD_App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap LightMode {
+        public static System.Drawing.Bitmap LightMode {
             get {
                 object obj = ResourceManager.GetObject("LightMode", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

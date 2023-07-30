@@ -5,30 +5,36 @@ using DSD_App.Models;
 using System.Diagnostics;
 using System.Text;
 using System.Web;
+using System.Reflection;
+using DSD_App.Properties;
 
 namespace DSD_App
 {
     public partial class BossForm : Form
     {
         // Constants
+        #region Constants
         private const string RulesURL = @"https://docs.google.com/document/d/1Hffx3O7SavIRUErIeLXMvRQ5yH6Lx1Xs9ZFuPqglvr4/edit";
         private const string DiscordURL = @"https://discord.gg/invite/darksouls3";
         private const string GitHubURL = @"https://github.com/DevoWarr/DSDChallengeRunning";
+        #endregion
 
         // Variables
-        private static string basePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Games");
-        private Version assemblyVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version!;
-        private GameData gameData;
-        private string currentGame = Properties.Settings.Default.CurrentGame;
+        #region Variables
+        private Version assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version!;
+        private GameManager gameManager;
+        private string currentGame = Settings.Default.CurrentGame;
         public List<Boss> bossList = new List<Boss>();
-        private RunType? currentRunType;
+        private RunType currentRunType;
         private int bossCount;
         private bool isDarkMode = false;
+        #endregion
 
+        // Constructor
         public BossForm()
         {
             InitializeComponent();
-            gameData = new GameData();
+            gameManager = new GameManager();
 
             InitializeRunTypes();
             FillAllBosses();
@@ -46,30 +52,17 @@ namespace DSD_App
         // Fills
         private void FillAllBosses()
         {
-            string[] folders = Directory.GetDirectories(basePath);
+            var bossNames = gameManager.LoadGameData()
+                .SelectMany(g => g.Bosses!).Select(b => b.Name!).ToArray();
 
-            foreach (string folder in folders)
-            {
-                string bossPath = Path.Combine(folder, "Bosses.txt");
-                string[] names = File.ReadAllLines(bossPath);
+            bossList.AddRange(bossNames.Select(b => new Boss { Name = b, Completed = false }));
 
-                bossList.AddRange(names.Select(b => new Boss { Name = b, Completed = false }));
-            }
-
-            clbBosses.Items.AddRange(bossList.Select(b => b.Name!).ToArray());
+            clbBosses.Items.AddRange(bossNames);
         }
         private void FillGames()
         {
-            var games = new[]
-            {
-                "Demon's Souls",
-                "Dark Souls I",
-                "Dark Souls II",
-                "Bloodborne",
-                "Dark Souls III",
-                "Sekiro",
-                "Elden Ring"
-            };
+            var games = gameManager.LoadGameData()
+                .Select(g => g.GameName!).ToArray();
 
             cbxGames.Items.AddRange(games);
 
@@ -80,26 +73,25 @@ namespace DSD_App
         }
 
         // Events
-        private async void cbxGames_SelectedIndexChanged(object sender, EventArgs e)
+        #region Events
+        private void cbxGames_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentGame = cbxGames.Text;
 
-            await LoadGameDataAsync(currentGame, basePath);
-            var gameInfo = gameData.GetGameInfo(currentGame);
+            var gameData = gameManager.LoadGameData();
+            var gameInfo = gameData.Where(g => g.GameName == currentGame).FirstOrDefault();
 
             clbBosses.Items.Clear();
             cbxRestrictions.Items.Clear();
-            int completed = gameInfo.Bosses!.Count(b => b.Completed);
+            int completed = gameInfo!.Bosses!.Count(b => b.Completed);
 
-            gameInfo.Bosses!.ForEach(b => clbBosses.Items.Add(b.Name!));
+            gameInfo!.Bosses!.ForEach(b => clbBosses.Items.Add(b.Name!));
             cbxRestrictions.Items.AddRange(gameInfo.Restrictions!.Select(r => r.Name).ToArray());
 
             lblBosses.Text = $"{completed}/{clbBosses.Items.Count}";
 
             TickCompletedBosses();
             CheckCompletedRun();
-
-            SaveGameData();
         }
         private void clbBosses_ItemCheck(object sender, ItemCheckEventArgs e)
         {
@@ -112,10 +104,9 @@ namespace DSD_App
             selectedBoss.Completed = e.NewValue == CheckState.Checked;
 
             var completedBosses = bossList.Where(b => b.Completed).ToList();
-            gameData.UpdateCompletedBosses(currentGame, completedBosses);
+            gameManager.UpdateCompletedBosses(currentGame, completedBosses);
 
             CheckCompletedRun();
-            SaveGameData();
         }
         private void rb_CheckedChanged(object sender, EventArgs e)
         {
@@ -129,8 +120,10 @@ namespace DSD_App
                 CheckCompletedRun();
             }
         }
+        #endregion
 
         // Button Events
+        #region Button Events
         private void btnReset_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show($"Would you like to reset progress for {currentGame}?", $"Reset {currentGame} Bosslist",
@@ -168,8 +161,9 @@ namespace DSD_App
             string entryCheck = "&entry.805188992=";
             string entryOther = "&entry.1655991278=";
 
-            string gamePath = Path.Combine(basePath, currentGame, "Submission.txt");
-            string submissionTemplate = File.ReadAllText(gamePath);
+            string submissionTemplate = gameManager.LoadGameData()
+                .Where(g => g.GameName == currentGame)
+                .Select(g => g.Submission).FirstOrDefault()!;
 
             string category = $"{entryRadio}{currentRunType}";
             string submissionURL;
@@ -209,7 +203,7 @@ namespace DSD_App
         private void btnMode_Click(object sender, EventArgs e)
         {
             isDarkMode = !isDarkMode;
-            Properties.Settings.Default.UserSelectedMode = isDarkMode;
+            Settings.Default.UserSelectedMode = isDarkMode;
             SetMode(isDarkMode);
         }
         private void btnInfo_Click(object sender, EventArgs e)
@@ -235,6 +229,7 @@ namespace DSD_App
 
             if (result == DialogResult.Yes) await OpenURLAsync(GitHubURL);
         }
+        #endregion
 
         // UI
         private void SetLightMode()
@@ -266,48 +261,51 @@ namespace DSD_App
             if (isDarkMode)
             {
                 SetDarkMode();
-                btnMode.Image = new Bitmap(Properties.Resources.LightMode, new Size(32, 32));
+                btnMode.Image = new Bitmap(Resources.LightMode, new Size(32, 32));
             }
             else
             {
                 SetLightMode();
-                btnMode.Image = new Bitmap(Properties.Resources.DarkMode, new Size(32, 32));
+                btnMode.Image = new Bitmap(Resources.DarkMode, new Size(32, 32));
             }
 
             btnSubmit.ForeColor = ColorThemes.ForegroundDark;
         }
 
         // BossForm
-        [Obsolete]
         private async void BossForm_Load(object sender, EventArgs e)
         {
-            isDarkMode = Properties.Settings.Default.UserSelectedMode;
+            isDarkMode = Settings.Default.UserSelectedMode;
             SetMode(isDarkMode);
 
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.CompletedBosses))
-                gameData?.DeserializeGameDataFromJson(Properties.Settings.Default.CompletedBosses);
+            var completedBosses = Settings.Default.CompletedBosses;
+
+            if (!string.IsNullOrEmpty(completedBosses))
+                gameManager?.DeserializeGameDataFromJson(completedBosses);
 
             TickRunType();
+
+            if (currentRunType == RunType.Legend)
+                cbxRestrictions.SelectedIndex = Settings.Default.CurrentRestriction;
 
             // GitHub Updates
             await CheckGitHubUpdates();
         }
-        private void BossForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            SaveGameData();
-        }
+        private void BossForm_FormClosing(object sender, FormClosingEventArgs e) =>
+            gameManager.SaveGameData(currentGame, currentRunType, cbxRestrictions.SelectedIndex);
 
         // Methods
+        #region Methods
         private void TickCompletedBosses()
         {
-            string completedBossesJson = Properties.Settings.Default.CompletedBosses;
+            string completedBossesJson = Settings.Default.CompletedBosses;
             if (!string.IsNullOrEmpty(completedBossesJson))
             {
-                var completedBosses = JsonConvert.DeserializeObject<Dictionary<string, GameInfo>>(completedBossesJson);
+                var completedBosses = JsonConvert.DeserializeObject<Dictionary<string, List<Boss>>>(completedBossesJson);
 
                 if (completedBosses!.TryGetValue(currentGame, out var gameData))
                 {
-                    var completedBossNames = gameData.Bosses!.Where(boss => boss.Completed)
+                    var completedBossNames = gameData!.Where(boss => boss.Completed)
                         .Select(boss => boss.Name).ToList();
 
                     for (int i = 0; i < clbBosses.Items.Count; i++)
@@ -320,7 +318,7 @@ namespace DSD_App
         }
         private void TickRunType()
         {
-            string currentRunType = Properties.Settings.Default.CurrentRunType;
+            string currentRunType = Settings.Default.CurrentRunType;
 
             if (Enum.TryParse(currentRunType, out RunType selectedRunType))
             {
@@ -340,7 +338,6 @@ namespace DSD_App
                         break;
                 }
             }
-
         }
         private List<string> FindRunTypes()
         {
@@ -411,8 +408,6 @@ namespace DSD_App
                 using (Process.Start(psi)) { }
             });
         }
-
-        [Obsolete]
         private async Task CheckGitHubUpdates()
         {
             GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue("DSDChallengeRunning"));
@@ -442,14 +437,6 @@ namespace DSD_App
 
             Text = $"DSD Challenge Running {assemblySemverString}";
         }
-        private void SaveGameData()
-        {
-            var gameDataJson = gameData.SerializeGameDataToJson();
-            Properties.Settings.Default.CurrentGame = currentGame;
-            Properties.Settings.Default.CurrentRunType = currentRunType.ToString();
-            Properties.Settings.Default.CompletedBosses = gameDataJson;
-        }
-        private async Task LoadGameDataAsync(string gameName, string basePath) =>
-            await Task.Run(() => gameData.LoadGameData(gameName, basePath));
+        #endregion
     }
 }

@@ -1,9 +1,0 @@
-SL1 CoC NG+7
-SL1 CoC +0 Weapons/+0 Armor No Infusions/Toxic/Poison
-SL1 CoC Broken Ladle only
-SL1 CoC Broken Thief Sword only
-SL1 CoC Broken Straight Sword only​
-SL1 CoC No Roll/Block/Parry
-SL1 & CoC Fist only
-SL1 No Hit Any%
-SL1 Deathless All bosses
