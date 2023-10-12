@@ -99,15 +99,20 @@ namespace DSD_App
             lblBosses.Text = $"{bossCount}/{clbBosses.Items.Count}";
 
             string bossName = clbBosses.Items[e.Index].ToString()!;
-            var selectedBoss = bossList.FirstOrDefault(b => b.Name == bossName)!;
+            var selectedBoss = bossList.FirstOrDefault(b => b.Name == bossName);
 
-            selectedBoss.Completed = e.NewValue == CheckState.Checked;
+            if (selectedBoss != null)
+            {
+                selectedBoss.Completed = e.NewValue == CheckState.Checked;
+                gameManager.UpdateCompletedBosses(currentGame, bossList);
 
-            var completedBosses = bossList.Where(b => b.Completed).ToList();
-            gameManager.UpdateCompletedBosses(currentGame, completedBosses);
+                Settings.Default.CompletedBosses = gameManager.SerializeGameDataToJson();
+                Settings.Default.Save();
 
-            CheckCompletedRun();
+                CheckCompletedRun();
+            }
         }
+
         private void rb_CheckedChanged(object sender, EventArgs e)
         {
             if (sender is RadioButton radioButton)
@@ -158,7 +163,7 @@ namespace DSD_App
             }
 
             string entryRadio = "entry.1804428826=";
-            string entryCheck = "&entry.805188992=";
+            string entryCheck = "&entry.805188992=Other";
             string entryOther = "&entry.1655991278=";
 
             string submissionTemplate = gameManager.LoadGameData()
@@ -167,27 +172,20 @@ namespace DSD_App
 
             string category = $"{entryRadio}{currentRunType}";
             string submissionURL;
-            string restrictionsParameters = string.Empty;
             string restriction = cbxRestrictions.SelectedItem?.ToString()!;
-            string challengeRun = currentRunType == RunType.Champion ? $"{currentGame} - {(currentGame == "Sekiro" ? "Base Vit" : "Champion")}" : restriction;
 
             if (currentRunType == RunType.Champion)
             {
-                string champTypeEntry = $"{entryCheck}{(currentGame == "Sekiro" ? "Base Vit" : "Champion")}";
-                submissionURL = submissionTemplate.Replace("{Category}", category)
-                                                 .Replace("{Restrictions}", champTypeEntry);
+                submissionURL = submissionTemplate.Replace("{Category}", category).Replace("{Restrictions}", string.Empty);
             }
-            else // Legend Run
+            else
             {
-                var restrictions = FindRunTypes();
-                restrictionsParameters = string.Join("&", restrictions.Select(r => $"{entryCheck}{r}"));
-
                 string otherRestriction = HttpUtility.UrlEncode(restriction);
                 submissionURL = submissionTemplate.Replace("{Category}", category)
-                                                 .Replace("{Restrictions}", restrictionsParameters + entryOther + otherRestriction);
+                                                 .Replace("{Restrictions}", entryCheck + entryOther + otherRestriction);
             }
 
-            DialogResult result = MessageBox.Show($"Congratulations on completing your run for {currentGame}: \n{challengeRun}\n" +
+            DialogResult result = MessageBox.Show($"Congratulations on completing your run for {currentGame}: \n{restriction}\n" +
                 $"You will be redirected to the Google Submission Form.\n" +
                 "Would you like to continue?", "Submission Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -316,6 +314,7 @@ namespace DSD_App
                 }
             }
         }
+
         private void TickRunType()
         {
             string currentRunType = Settings.Default.CurrentRunType;
@@ -338,48 +337,6 @@ namespace DSD_App
                         break;
                 }
             }
-        }
-        private List<string> FindRunTypes()
-        {
-            var restrictions = new List<string>();
-
-            var types = new List<string>
-            {
-                "NG", "CoC", "Broken Thief Sword", "Broken Straight Sword", "+0",
-                "No Roll", "Deathless", "No Hit", "NG+ 7 No Aux", "No Roll/Block/Parry", "+0 Weapons No Aux",
-                "No Deflect", "No Items", "Sword Only", "Base Att", "Hardmode"
-            };
-
-            string selectedRestriction = cbxRestrictions.Text;
-
-            if (selectedRestriction.Contains(types[0]))
-                restrictions.Add("Max Ng");
-
-            if (selectedRestriction.Contains(types[1]))
-                restrictions.Add("Company of Champion");
-
-            restrictions.AddRange(types
-                .Where(type => selectedRestriction.Contains(type))
-                .Select(type => HttpUtility.UrlEncode(type))
-                .ToList());
-
-            if (restrictions.Count == 0 || restrictions.Contains(HttpUtility.UrlEncode(types[3]))) // None or DS1 BSS
-                restrictions.Add("Other");
-
-            if (selectedRestriction.Contains("CoC") && restrictions.Count == 2) restrictions.Add("Other");
-
-            if (currentGame == "Sekiro")
-            {
-                restrictions.Add("Base Vit");
-
-                if (restrictions.Count == 2)
-                    restrictions.Add("Other");
-            }
-
-            if (selectedRestriction == "SL1 NG+ Broken Weapons No Auxiliary (Bleed/Toxic/Poison/Frost)")
-                restrictions.Remove("Max Ng");
-
-            return restrictions;
         }
         private void CheckCompletedRun()
         {
@@ -416,7 +373,7 @@ namespace DSD_App
             try
             {
                 Release release = await gitHubClient.Repository.Release.GetLatest("DevoWarr", "DSDChallengeRunning");
-                
+
                 var latestVersion = SemVersion.Parse(release.TagName);
                 assemblySemverString = new Version(assemblyVersion.Major, assemblyVersion.Minor, assemblyVersion.Build).ToString();
                 var assemblySemver = SemVersion.Parse(assemblySemverString);

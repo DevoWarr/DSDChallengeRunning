@@ -62,13 +62,10 @@
                 "Name": "SL1 NG+5"
             },
             {
-                "Name": "SL1 No Roll/Block/Parry"
+                "Name": "SL1 No Rolling/Blocking/Parrying Flawless"
             },
             {
                 "Name": "SL1 +0 Weapons No Toxic/Poison"
-            },
-            {
-                "Name": "SL1 Fist only"
             },
             {
                 "Name": "SL1 No Hit"
@@ -163,7 +160,7 @@
                 "Name": "SL1 NG+6"
             },
             {
-                "Name": "SL1 No Roll/Block/Parry"
+                "Name": "SL1 No Roll/Block/Parry Flawless"
             },
             {
                 "Name": "SL1 +0 Weapons/+0 Armor No Infusions/Toxic/Poison"
@@ -511,16 +508,16 @@
         ],
         "Restrictions": [
             {
-                "Name": "SL1 NG+7 No Auxiliary (Bleed/Toxic/Poison/Frost)"
+                "Name": "SL1 NG+7 No Auxiliary"
             },
             {
                 "Name": "SL1 No Roll/Block/Parry"
             },
             {
-                "Name": "SL1 +0 Weapons No Infusions/No Auxiliary (Bleed/Toxic/Poison/Frost)"
+                "Name": "SL1 +0 Weapons No Infusions/No Auxiliary"
             },
             {
-                "Name": "SL1 NG+ Broken Weapons No Auxiliary (Bleed/Toxic/Poison/Frost)"
+                "Name": "SL1 NG+ Broken Weapons No Auxiliary"
             },
             {
                 "Name": "SL1 No Hit Any%"
@@ -576,22 +573,16 @@
         ],
         "Restrictions": [
             {
-                "Name": "​​No Block / No Deflect"
-            },
-            {
-                "Name": "NG+7 (Max 14 AP)"
+                "Name": "​​No Block/No Deflect"
             },
             {
                 "Name": "No prosthetic tools"
             },
             {
-                "Name": "Attack Power 1 (Base Att)"
+                "Name": "No items/buffs"
             },
             {
-                "Name": "AP1 No Hit Immortal Severance"
-            },
-            {
-                "Name": "Deathless All bosses"
+                "Name": "No skills/combat arts"
             }
         ],
         "Submission": "https://docs.google.com/forms/d/e/1FAIpQLSc368wtKmjaXE9GHMiHG9GWOe5su8GMq_f6of_vPp5_4ga2Kw/viewform?{Category}{Restrictions}"
@@ -674,13 +665,16 @@
         ],
         "Restrictions": [
             {
-                "Name": "RL1 NG+ 7 No Auxiliary (Poison/Rot/Bleed/Frost/Sleep/Madness/Blight)"
+                "Name": "RL1 NG+ 7 No Auxiliary"
             },
             {
                 "Name": "RL1 No Roll/Block/Parry"
             },
             {
-                "Name": "RL1 +0 Weapons No Auxiliary (Poison/Rot/Bleed/Frost/Sleep/Madness/Blight)"
+                "Name": "RL1 +0 Weapons No Auxiliary"
+            },
+            {
+                "Name": "RL1 NG+ Torch Weapons No Auxiliary"
             }
         ],
         "Submission": "https://docs.google.com/forms/d/e/1FAIpQLSe2Vo-WZ8fl4nG5y2zyti_bUQ4aTLbhc2SdtcTk0fkPJTFjGA/viewform?{Category}{Restrictions}"
